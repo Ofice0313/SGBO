@@ -11,7 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('materiais', function(Blueprint $table){
+            $table->id();
+            $table->string('titulo');
+            $table->string('autor');
+            $table->string('editora');
+            $table->string('ano_de_publicacao');
+            $table->string('caminho_do_arquivo');
+            $table->string('caminho_da_imagem');
+            $table->integer('paginas');
+            $table->enum('tipo', ['LIVRO', 'AUDIOLIVRO']);
+            $table->enum('status', ['ATIVO', 'INATIVO']);
+            $table->timestamps();
+        });
+        
     }
 
     /**
@@ -19,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('materiais');
     }
 };
