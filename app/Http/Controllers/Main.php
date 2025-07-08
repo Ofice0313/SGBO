@@ -60,12 +60,24 @@ class Main extends Controller
         return redirect()->route('index')->with('success', 'Material registrado com sucesso!');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+
+        $query = Material::query();
         $materiais = Material::all();
+
+        // Se houver busca por título
+        if ($request->has('search') && $request->search != '') {
+            $query->where('titulo', 'LIKE', '%' . $request->search . '%');
+        }
+
+        // Pega todos (ou filtrados)
+        $materiais = $query->orderBy('created_at', 'desc')->paginate(10);
+
         return view('index', [
             'title' => 'Lista de Materiais',
             'materiais' => $materiais,
+            'search' => $request->search,
             'datatables' => true
         ]);
     }

@@ -26,12 +26,24 @@
 
         <div class="mb-3">
             <label for="subcategoria" class="form-label">Subcategoria</label>
-            <input type="text" class="form-control" name="subcategoria" id="subcategoria" placeholder="Ex: Poesia Hip Hop">
+            <select name="subcategoria" id="subcategoria" class="form-select" required>
+                <option value="">Selecione</option>
+                <option value="PROGRAMACAO">PROGRAMAÇÃO</option>
+                <option value="REDES">Redes</option>
+                <option value="BANCO DE DADOS">Banco de Dados</option>
+                <option value="DESIGN">Design</option>
+                <option value="INTELIGENCIA ARTIFICIAL">Inteligência Artificial</option>
+                <option value="MEDICINAGERAL">Medicina Geral</option>
+            </select>
         </div>
 
         <div class="mb-3">
             <label for="categoria" class="form-label">Categoria</label>
-            <input type="text" class="form-control" name="categoria" id="categoria" placeholder="Ex: Literatura">
+            <select name="categoria" id="categoria" class="form-select" required>
+                <option value="TECNOLOGIA">Tecnologia</option>
+                <option value="SAUDE">Saude</option>
+            </select>
+            
         </div>
 
         <div class="mb-3">
@@ -65,8 +77,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">
-            <a href="{{ route('index') }} ">
-            <i class="bi bi-save me-1"></i></a> Registrar Material
+            <i class="bi bi-save me-1"></i>Registrar Material
         </button>
     </form>
 </div>

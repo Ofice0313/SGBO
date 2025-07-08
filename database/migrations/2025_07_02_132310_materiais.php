@@ -12,12 +12,6 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::create('subcategoria', function (Blueprint $table) {
-            $table->id();
-            $table->enum('subcategoria', ['PROGRAMACAO', 'MEDICINAGERAL']);
-            $table->timestamps();
-        });
-
         Schema::create('materiais', function(Blueprint $table){
             $table->id();
             $table->string('titulo');
@@ -29,8 +23,8 @@ return new class extends Migration
             $table->integer('paginas');
             $table->enum('tipo', ['LIVRO', 'AUDIOLIVRO']);
             $table->enum('status', ['ATIVO', 'INATIVO']);
-            $table->timestamps();
-            $table->foreignId('subcategoria_id')->constrained('subcategoria');
+            $table->enum('categoria', ['TECNOLOGIA', 'SAUDE']);
+            $table->enum('subcategoria', ['PROGRAMACAO', 'REDES', 'BANCO DE DADOS', 'MEDICINAGERAL', 'INTELIGENCIA ARTIFICIAL', 'DESIGN']);
             $table->timestamps();
         });
         

@@ -3,12 +3,22 @@
 @section('content')
 
 <div class="container mt-5">
-    <div class="d-flex justify-content-between mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <h4>Materiais</h4>
         <a href="{{ route('register') }}" class="btn btn-primary">
             <i class="bi bi-plus-square me-2"></i>Adicionar novo Material
         </a>
     </div>
+
+    <!-- ✅ Barra de pesquisa logo abaixo do título -->
+    <form action="{{ route('index') }}" method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="search" value="{{ $search }}" class="form-control" placeholder="Pesquisar por título...">
+            <button class="btn btn-primary" type="submit">
+                <i class="bi bi-search"></i> Buscar
+            </button>
+        </div>
+    </form>
 
     <div class="table-responsive">
         <table id="materiaisTable" class="table table-bordered table-striped">
