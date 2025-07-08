@@ -10,5 +10,8 @@ class Subcategoria extends Model
 
     protected $table = 'subcategoria';
 
-    
+    public function materiais()
+    {
+        return $this->hasMany(Material::class);
+    }
 }

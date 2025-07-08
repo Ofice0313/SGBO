@@ -28,5 +28,11 @@ class Material extends Model
         'paginas',
         'caminho_da_imagem',
         'caminho_do_arquivo',
+        'subcategoria_id',
     ];
+
+    public function subcategoria()
+    {
+        return $this->belongsTo(Subcategoria::class);
+    }
 }
