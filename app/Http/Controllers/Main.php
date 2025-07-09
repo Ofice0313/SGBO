@@ -31,8 +31,12 @@ class Main extends Controller
             'telefone' => 'nullable|string|max:50',
             'endereco' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'instituicao' => 'required|string',
+            'instituicao' => 'required|in:LORE,ISLORE,FOCO',
             'password' => 'required|confirmed|min:6',
+        ],
+         ['password.confirmed' => 'As passwords não coincidem.',
+            'instituicao.required' => 'Selecione uma instituicao',
+            'instituicao.in' => 'Instituicao Invalida',
         ]);
 
         $user = new UserModel();
@@ -54,8 +58,49 @@ class Main extends Controller
         return view('login', $data);
     }
 
-    public function login_submit(){
-        echo 'subb';
+    public function login_submit(Request $request){
+         //Form validation
+        $request->validate([
+            'email' => 'required|min:6',
+            'instituicao' => 'required|in:LORE,ISLORE,FOCO',
+            'password' => 'required|min:5',
+        ],[
+            'email.required' => 'O campo eh de preenchimento obrigatorio.',
+            'email.min' => 'O campo deve ter no minimo 6 caracteres',
+            'instituicao.required' => 'Selecione uma instituicao',
+            'instituicao.in' => 'Instituicao Invalida',
+            'password.required' => 'O campo eh de preenchimento obrigatorio.',
+            'password.min' => 'O campo deve ter no minimo 3 caracteres.',
+        ]);
+
+        // get form data
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $instituicao = $request->input('instituicao');
+
+        //check if users exists
+        $model = new UserModel();
+        $user = $model->where('email', '=', $email)->where('instituicao', '=', $instituicao)->whereNull('deleted_at')->first();
+        if($user){
+            //Check if password is correct
+            if(password_verify($password, $user->password)){
+                $session_data = [
+                    'id' => $user->id,
+                    'email' => $user->email
+                ];
+                session()->put($session_data);
+                return redirect()->route('index');
+            }
+        }
+
+        // invalid login
+        return redirect()->route('login')->withInput()->with('login_error', 'Login invalido');
+    }
+
+    // logout 
+    public function logout(){
+        session()->forget('email');
+        return redirect()->route('login');
     }
 
     public function new_register_submit(Request $request)

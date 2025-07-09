@@ -43,7 +43,7 @@
                   </div>
 
                   <div class="pt-1 mb-4">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block w-100" type="button">Entrar</button>
+                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block w-100" type="submit">Entrar</button>
                   </div>
 
                   <a class="small text-muted" href="#!">Esqueceu o password?</a>

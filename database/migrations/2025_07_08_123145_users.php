@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('instituicao', ['LORE', 'FOCO', 'ISLORE'])->nullable();
             $table->timestamps();
+            $table->dateTime('deleted_at')->nullable(true)->default(null);
         });
     }
 

@@ -4,10 +4,14 @@ namespace App\Models;
 
 use App\Enums\Instituicao;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserModel extends Model
 {
-    protected $table = 'users';
+
+    use SoftDeletes;
+
+    protected $table = 'usuarios';
 
     protected $instituicao = ['instituicao' => Instituicao::class,];
 
