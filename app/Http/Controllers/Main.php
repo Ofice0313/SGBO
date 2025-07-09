@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Material;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class Main extends Controller
 {
@@ -13,6 +15,47 @@ class Main extends Controller
             'title' => 'Novo Registro',
         ];
         return view('register', $data);
+    }
+
+    public function register_users(){
+        $data = [
+            'title' => 'Registro de usuários',
+        ];
+        return view('register_usuarios', $data);
+    }
+
+    public function register_submit_users(Request $request){
+
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'telefone' => 'nullable|string|max:50',
+            'endereco' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'instituicao' => 'required|string',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        $user = new UserModel();
+        $user->name = $request->name;
+        $user->telefone = $request->telefone;
+        $user->endereco = $request->endereco;
+        $user->email = $request->email;
+        $user->instituicao = $request->instituicao;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('index')->with('success', 'Conta criada com sucesso! Faça login.');
+    }
+
+    public function login(){
+        $data = [
+            'title' => 'login'
+        ];
+        return view('login', $data);
+    }
+
+    public function login_submit(){
+        echo 'subb';
     }
 
     public function new_register_submit(Request $request)

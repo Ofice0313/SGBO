@@ -21,3 +21,11 @@ Route::post('/material/{id}/update', [Main::class, 'update'])->name('update');
 
 // Deletar material
 Route::post('/material/{id}/delete', [Main::class, 'delete'])->name('delete');
+
+// login routes
+Route::get('/login', [Main::class, 'login'])->name('login');
+Route::post('/login_submit', [Main::class, 'login_submit'])->name('login_submit');
+
+// New register users
+Route::get('/register_users', [Main::class, 'register_users'])->name('register_users');
+Route::post('/register_submit_users', [Main::class, 'register_submit_users'])->name('register_submit_users');

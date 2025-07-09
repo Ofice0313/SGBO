@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function(Blueprint $table){
+        Schema::create('usuarios', function(Blueprint $table){
             $table->id();
-            $table->string('nome');
-            $table->string('endereco');
-            $table->string('telefone');
-            $table->string('email');
+            $table->string('nome')->nullable();
+            $table->string('endereco')->nullable();
+            $table->string('telefone')->nullable();
+            $table->string('email')->unique();
             $table->boolean('status');
             $table->string('password');
-            $table->enum('instituicao', ['LORE', 'FOCO', 'ISLORE']);
+            $table->enum('instituicao', ['LORE', 'FOCO', 'ISLORE'])->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('usuarios');
     }
 };
