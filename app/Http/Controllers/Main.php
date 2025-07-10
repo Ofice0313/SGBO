@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class Main extends Controller
 {
-    public function register()
+    public function register_materiais()
     {
         $data = [
             'title' => 'Novo Registro',
         ];
-        return view('register', $data);
+        return view('register_materiais', $data);
     }
 
     public function register_users(){
@@ -171,11 +171,11 @@ class Main extends Controller
     }
 
     // Mostra o form de edição
-    public function edit($id)
+    public function edit_materiais($id)
     {
         $material = Material::findOrFail($id);
 
-        return view('edit', [
+        return view('edit_materiais', [
             'title' => 'Editar Material',
             'material' => $material
         ]);

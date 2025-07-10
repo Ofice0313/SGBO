@@ -5,7 +5,7 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4>Materiais</h4>
-        <a href="{{ route('register') }}" class="btn btn-primary">
+        <a href="{{ route('register_materiais') }}" class="btn btn-primary">
             <i class="bi bi-plus-square me-2"></i>Adicionar novo Material
         </a>
     </div>
@@ -50,7 +50,7 @@
                     <td>{{ $material->editora }}</td>
                     <td>{{ $material->ano_de_publicacao }}</td>
                     <td>
-                        <a href="{{ route('edit', $material->id) }}" class="btn btn-sm btn-warning">
+                        <a href="{{ route('edit_materiais', $material->id) }}" class="btn btn-sm btn-warning">
                             <i class="bi bi-pencil"></i>
                         </a>
                         <form action="{{ route('delete', $material->id) }}" method="POST" class="d-inline">

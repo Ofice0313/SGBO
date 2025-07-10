@@ -14,10 +14,10 @@ Route::middleware(CheckLogin::class)->group(function(){
     Route::get('/', [Main::class, 'index'])->name('index');
 
     // New register
-    Route::get('/register', [Main::class, 'register'])->name('register');
+    Route::get('/register_materiais', [Main::class, 'register_materiais'])->name('register_materiais');
     Route::post('/new_register_submit', [Main::class, 'new_register_submit'])->name('new_register_submit');
     // Form de editar
-    Route::get('/material/{id}/edit', [Main::class, 'edit'])->name('edit');
+    Route::get('/material/{id}/edit_materiais', [Main::class, 'edit_materiais'])->name('edit_materiais');
 
     // Atualizar material
     Route::post('/material/{id}/update', [Main::class, 'update'])->name('update');

@@ -47,8 +47,8 @@
                   </div>
 
                   <a class="small text-muted" href="#!">Esqueceu o password?</a>
-                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Já tens conta? <a href="#!"
-                      style="color: #393f81;">Registre-se</a></p>
+                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Não tens conta? <a href="#!"
+                      style="color: #393f81;">Registri-se aqui</a></p>
                 </form>
 
               </div>
