@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->boolean('status');
             $table->string('password');
+            $table->foreignId('curso_id')->constrained('cursos')->onDelete('cascade');
             $table->enum('instituicao', ['LORE', 'FOCO', 'ISLORE'])->nullable();
             $table->timestamps();
             $table->dateTime('deleted_at')->nullable(true)->default(null);

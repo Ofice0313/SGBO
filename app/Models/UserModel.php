@@ -23,4 +23,14 @@ class UserModel extends Model
         'status',
         'password',
     ];
-}
+
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class, 'curso_id');
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_usuario', 'usuario_id', 'role_id');
+    }
+ }
