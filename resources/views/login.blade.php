@@ -47,7 +47,7 @@
                   </div>
 
                   <a class="small text-muted" href="#!">Esqueceu o password?</a>
-                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Não tens conta? <a href="#!"
+                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Não tens conta? <a href="{{ route('register_users') }}"
                       style="color: #393f81;">Registri-se aqui</a></p>
                 </form>
 
