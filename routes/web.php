@@ -34,9 +34,12 @@ Route::middleware(CheckLogout::class)->group(function(){
     Route::post('/login_submit', [Main::class, 'login_submit'])->name('login_submit');
 });
 
+// dashboard administrativo
 Route::get('/dashboard', [Main::class, 'dashboard'])->name('dashboard');
 Route::get('/dashboard_visao_geral', [Main::class, 'dashboard_visao_geral'])->name('dashboard_visao_geral');
 
+// tela de livros
+Route::get('/tela_de_livros', [Main::class, 'tela_de_livros'])->name('tela_de_livros');
 // New register users
 Route::get('/register_users', [Main::class, 'register_users'])->name('register_users');
 Route::post('/register_submit_users', [Main::class, 'register_submit_users'])->name('register_submit_users');

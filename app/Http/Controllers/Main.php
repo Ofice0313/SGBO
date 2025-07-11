@@ -26,6 +26,14 @@ class Main extends Controller
         return view('dashboard_visao_geral', $data);
     }
 
+    public function tela_de_livros(){
+        $data = [
+            'title' => 'tela de livros',
+        ];
+
+        return view('tela_de_livros', $data);
+    }
+
     public function register_materiais()
     {
         $data = [
