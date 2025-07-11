@@ -21,17 +21,15 @@
     </form>
 
     <div class="table-responsive">
-        <table id="materiaisTable" class="table table-bordered table-striped">
-            <thead class="table-dark">
+        <table id="materiaisTable" class="table">
+            <thead class="table-light">
                 <tr>
                     <th>ID</th>
                     <th>Imagem</th>
                     <th>Título</th>
-                    <th>Subcategoria</th>
-                    <th>Tipo</th>
                     <th>Autor</th>
-                    <th>Editora</th>
-                    <th>Ano</th>
+                    <th>Subcategoria</th>
+                    <th>Tipo de Materia</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -44,11 +42,9 @@
                              alt="Capa" width="50">
                     </td>
                     <td>{{ $material->titulo }}</td>
+                    <td>{{ $material->autor }}</td>
                     <td>{{ $material->subcategoria }}</td>
                     <td>{{ $material->tipo }}</td>
-                    <td>{{ $material->autor }}</td>
-                    <td>{{ $material->editora }}</td>
-                    <td>{{ $material->ano_de_publicacao }}</td>
                     <td>
                         <a href="{{ route('edit_materiais', $material->id) }}" class="btn btn-sm btn-warning">
                             <i class="bi bi-pencil"></i>
