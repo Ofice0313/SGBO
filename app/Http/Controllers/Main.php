@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 class Main extends Controller
 {
+
+    public function dashboard(){
+        $data = [
+            'title' => 'dashboard',
+        ];
+
+        return view('dashboard', $data);
+    }
+
     public function register_materiais()
     {
         $data = [

@@ -34,6 +34,7 @@ Route::middleware(CheckLogout::class)->group(function(){
     Route::post('/login_submit', [Main::class, 'login_submit'])->name('login_submit');
 });
 
+Route::get('/dashboard', [Main::class, 'dashboard'])->name('dashboard');
 
 // New register users
 Route::get('/register_users', [Main::class, 'register_users'])->name('register_users');
