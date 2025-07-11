@@ -18,6 +18,14 @@ class Main extends Controller
         return view('dashboard', $data);
     }
 
+    public function dashboard_visao_geral(){
+        $data = [
+            'title' => 'dashboard',
+        ];
+
+        return view('dashboard_visao_geral', $data);
+    }
+
     public function register_materiais()
     {
         $data = [

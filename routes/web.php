@@ -35,6 +35,7 @@ Route::middleware(CheckLogout::class)->group(function(){
 });
 
 Route::get('/dashboard', [Main::class, 'dashboard'])->name('dashboard');
+Route::get('/dashboard_visao_geral', [Main::class, 'dashboard_visao_geral'])->name('dashboard_visao_geral');
 
 // New register users
 Route::get('/register_users', [Main::class, 'register_users'])->name('register_users');
