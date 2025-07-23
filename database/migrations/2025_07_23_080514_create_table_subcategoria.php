@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('subcategoriais', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('material_id');
+            $table->foreign('material_id')->references('id')->on('materiais')->onDelete('cascade'); 
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_subcategoria');
+        Schema::dropIfExists('subcategoriais');
     }
 };

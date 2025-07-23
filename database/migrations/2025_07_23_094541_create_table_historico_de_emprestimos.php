@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('historico_de_emprestimos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('emprestimo_id');
             $table->timestamps();
+            $table->foreign('emprestimo_id')->references('id')->on('emprestimos')->onDelete('cascade');
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_historico_de_emprestimo');
+        Schema::dropIfExists('historico_de_emprestimos');
     }
 };
