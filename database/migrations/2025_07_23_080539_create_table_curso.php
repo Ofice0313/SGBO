@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('nome');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->dateTime('deleted_at')->nullable(true)->default(null);
         });
     }
 

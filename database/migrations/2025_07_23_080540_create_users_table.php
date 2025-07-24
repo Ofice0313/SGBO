@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('curso_id')->nullable();
+            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
             $table->string('nome');
             $table->string('email')->unique();           
             $table->string('endereco')->nullable();

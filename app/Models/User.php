@@ -50,4 +50,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class);
+    }
+
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function materiais()
+    {
+        return $this->belongsToMany(Material::class, 'emprestimos');
+    }
 }

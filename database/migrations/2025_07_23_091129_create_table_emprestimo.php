@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('emprestimos', function (Blueprint $table) {
-            $table->id();
+            $table->id(); 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('material_id')->nullable();
             $table->date('data_de_retirada');
@@ -20,7 +20,6 @@ return new class extends Migration
             $table->decimal('multa', 8, 2)->default(0);
             $table->boolean('notificacao')->default(false);
             $table->enum('status_emprestimo', ['PENDENTE', 'EMPRESTADO', 'DEVOLVIDO'])->default('PENDENTE');
-            $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('material_id')->references('id')->on('materiais')->onDelete('set null');
         });
