@@ -20,6 +20,15 @@ class DatabaseSeeder extends Seeder
         // //     'email' => 'test@example.com',
         // // ]);
 
-        $this->call(UsersTableSeeder::class);
+       $this->call([
+            MaterialSeeder::class,          // 1. Material não depende de ninguém
+            CategoriaSeeder::class,         // 2. Categoria não depende de ninguém
+            SubcategoriaSeeder::class,      // 3. Subcategoria depende de Material e Categoria (já criados)
+            CursoSeeder::class,             // 4. Curso é independente
+            RoleSeeder::class,              // 5. Role é independente
+            UsersTableSeeder::class,        // 6. User depende de Curso
+            EmprestimoSeeder::class,        // 7. Emprestimo depende de User e Material
+            HistoricoDeEmprestimoSeeder::class // 8. Historico depende de Emprestimo
+        ]);
     }
 }

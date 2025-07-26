@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categoriais', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('subcategoria_id');
             $table->string('nome');
-            $table->foreign('subcategoria_id')->references('id')->on('subcategoriais')->onDelete('cascade');
             $table->timestamps();
         });
     }

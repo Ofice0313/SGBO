@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('status_emprestimo', ['PENDENTE', 'EMPRESTADO', 'DEVOLVIDO'])->default('PENDENTE');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('material_id')->references('id')->on('materiais')->onDelete('set null');
+            $table->timestamps();
         });
     }
 

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('tipo', ['LIVRO', 'AUDIOLIVRO']);
             $table->enum('status_material', ['DISPONIVEL', 'INDISPONIVEL']);
             $table->timestamps();
+            $table->softDeletes();  
         });
     }
 
