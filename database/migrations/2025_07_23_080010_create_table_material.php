@@ -13,15 +13,18 @@ return new class extends Migration
     {
         Schema::create('materiais', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
+            $table->string('titulo')->unique();
             $table->string('autor');
-            $table->string('editora');
-            $table->string('ano_de_publicacao');
-            $table->string('caminho_do_arquivo');
-            $table->string('caminho_da_imagem');
+            $table->string('editora')->nullable();
+            $table->string('ano_de_publicacao')->nullable();
+            $table->string('caminho_do_arquivo')->nullable();
+            $table->string('caminho_do_audio')->nullable();
+            $table->string('caminho_da_imagem')->nullable();
             $table->integer('paginas');
+            $table->integer('minutos');
             $table->enum('tipo', ['LIVRO', 'AUDIOLIVRO']);
             $table->enum('status_material', ['DISPONIVEL', 'INDISPONIVEL']);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();  
         });
