@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\Categoria;
 use App\Models\Material;
+use App\Models\Subcategoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -18,13 +21,18 @@ class MaterialController extends Controller
 
     public function index()
     {
-        $materiais = Material::where('is_active', true)->paginate(12);
-        return view('materiais.index', compact('materiais'));
+        $materiais = Material::with('subcategoria')->paginate(10);
+        return view('admin.materiais.index', compact('materiais'));
     }
 
     public function create()
     {
-        return view('books.create');
+        $categorias = Categoria::all();
+        $subcategorias = Subcategoria::with('categoria')->get();
+        $data = [
+            'title' => 'registro_de_material',
+        ];
+        return view('admin.materiais.registro_de_material', $data, compact('categorias', 'subcategorias'));
     }
 
 
@@ -130,6 +138,8 @@ class MaterialController extends Controller
             'titulo' => 'required|string|max:255',
             'autor' => 'required|string|max:255',
             'editora' => 'nullable|string',
+            'ano_de_publicacao' => 'nullable|string',
+            'subcategoria_id' => 'required|exists:subcategorias,id',
             'caminho_do_arquivo' => 'nullable|file|mimes:pdf|max:50000', // 50MB
             'caminho_do_audio' => 'nullable|file|mimes:mp3,wav,m4a|max:200000', // 200MB
             'caminho_da_imagem' => 'nullable|image|max:5000', // 5MB
@@ -145,6 +155,7 @@ class MaterialController extends Controller
         $material->autor = $request->autor;
         $material->editora = $request->editora;
         $material->ano_de_publicacao = $request->ano_de_publicacao;
+        $material->subcategoria_id = $request->subcategoria_id;
         $material->paginas = $request->paginas;
         $material->minutos = $request->minutos;
         $material->tipo = $request->tipo;
@@ -156,7 +167,7 @@ class MaterialController extends Controller
             $pdfFile = $request->file('caminho_do_arquivo');
             $pdfName = Str::uuid() . '.pdf';
             $pdfFile->storeAs('private/books', $pdfName);
-            $material->caminho_do_arquivo= $pdfName;
+            $material->caminho_do_arquivo = $pdfName;
         }
 
         // Upload do áudio
@@ -177,8 +188,9 @@ class MaterialController extends Controller
 
         $material->save();
 
-        return redirect()->route('books.index')->with('success', 'Livro adicionado com sucesso!');
+        return redirect()->route('admin.materiais.index')->with('success', 'Livro adicionado com sucesso!');
     }
+
 
     public function edit(Material $material)
     {

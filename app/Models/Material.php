@@ -6,11 +6,12 @@ use App\Enums\StatusMaterial;
 use App\Enums\TipoDeMaterial;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Material extends Model
 {
 
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'materiais';
 
@@ -37,7 +38,7 @@ class Material extends Model
         'minutos'
     ];
     
-    public function subcategorias()
+    public function subcategoria()
     {
         return $this->belongsTo(Subcategoria::class);
     }

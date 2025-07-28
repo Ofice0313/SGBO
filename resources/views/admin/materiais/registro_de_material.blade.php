@@ -16,7 +16,7 @@
                 <!-- Formulário -->
                 <div class="col-lg-8">
                     <h2 class="h5 fw-semibold text-center mb-4">Registrar Material</h2>
-                    <form action="{{ route('novo_registro_material_submit') }}" method="POST"
+                    <form action="{{ route('admin.materiais.store') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="ano_de_publicacao" class="form-label">Ano de publicação</label>
-                                <input type="number" id="ano_publicacao" name="ano_de_publicacao" class="form-control"
+                                <input type="number" min="0" id="ano_publicacao" name="ano_de_publicacao" class="form-control"
                                     placeholder="Ex: 1927">
                             </div>
                             <div class="col-md-6">
@@ -79,25 +79,24 @@
                             </div>
                             <div class="col-12">
                                 <label for="paginas" class="form-label">Número de Páginas</label>
-                                <input type="number" class="form-control" name="paginas" id="paginas"
+                                <input type="number" class="form-control" min="0" name="paginas" id="paginas"
                                     placeholder="Total de páginas">
                             </div>
 
                             <div class="col-12 d-flex flex-column flex-md-row align-items-start gap-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" name="arquivo" type="checkbox" id="arquivo"
+                                <div class="col-md-6">
+                                    <label for="arquivo" class="form-label">Arquivo do material</label>
+                                    <input class="form-control" type="file" name="arquivo" id="arquivo"
                                         accept=".pdf,.doc,.docx,.epub,.mp3,.wav">
-                                    <label class="form-check-label" for="escolher_arquivo">
-                                        Escolher caminho do arquivo
-                                    </label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="escolher_imagem">
-                                    <label class="form-check-label" for="imagem" id="imagem">
-                                        Escolher imagem da capa
-                                    </label>
+
+                                <div class="col-md-6">
+                                    <label for="imagem" class="form-label">Imagem da capa</label>
+                                    <input class="form-control" type="file" name="imagem" id="imagem" accept="image/*">
                                 </div>
+
                             </div>
+
 
                         </div>
 
