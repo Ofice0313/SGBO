@@ -13,8 +13,8 @@ class CategoriaSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-     public function run(): void
+      public function run()
     {
-        Categoria::factory()->count(10)->create();
+        Categoria::factory(5)->create(); // cria 5 categorias
     }
 }

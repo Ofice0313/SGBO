@@ -33,6 +33,8 @@ class Material extends Model
         'caminho_do_arquivo',
         'status_material',
         'is_active',
+        'subcategoria_id',
+        'minutos'
     ];
     
     public function subcategorias()

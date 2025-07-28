@@ -135,7 +135,7 @@ class MaterialController extends Controller
             'caminho_da_imagem' => 'nullable|image|max:5000', // 5MB
             'paginas' => 'required|integer|min:1',
             'minutos' => 'required|integer|min:1',
-            'tipo' => 'required|in:LIVRO,AUDIOLIVRO',
+            'tipo' => 'required|in:LIVRO,AUDIOLIVRO,ARTIGO,REVISTA',
             'status_material' => 'required|in:DISPONIVEL,INDISPONIVEL',
             'is_active' => 'boolean',
         ]);

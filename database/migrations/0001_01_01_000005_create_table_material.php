@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('materiais', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('subcategoria_id');
+            $table->foreign('subcategoria_id')->references('id')->on('subcategorias')->onDelete('cascade');
             $table->string('titulo')->unique();
             $table->string('autor');
             $table->string('editora')->nullable();
@@ -21,8 +23,9 @@ return new class extends Migration
             $table->string('caminho_do_audio')->nullable();
             $table->string('caminho_da_imagem')->nullable();
             $table->integer('paginas');
-            $table->integer('minutos');
-            $table->enum('tipo', ['LIVRO', 'AUDIOLIVRO']);
+            $table->integer('minutos')->nullable();
+            $table->enum('tipo', ['LIVRO', 'AUDIOLIVRO', 'ARTIGO', 'REVISTA'])
+                ->default('LIVRO');
             $table->enum('status_material', ['DISPONIVEL', 'INDISPONIVEL']);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

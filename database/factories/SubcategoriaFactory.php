@@ -21,7 +21,6 @@ class SubcategoriaFactory extends Factory
         return [
             'nome' => $this->faker->word(),
             'categoria_id' => Categoria::inRandomOrder()->value('id') ?? Categoria::factory()->create()->id,
-            'material_id' => Material::inRandomOrder()->value('id') ?? Material::factory()->create()->id,
             'created_at' => now(),
             'updated_at' => now(),
             'deleted_at' => null,

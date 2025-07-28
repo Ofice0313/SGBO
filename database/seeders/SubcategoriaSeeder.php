@@ -15,14 +15,11 @@ class SubcategoriaSeeder extends Seeder
      */
     public function run(): void
     {
-        // Garante que existam categorias e materiais para relacionar
-        if (Categoria::count() === 0) {
-            Categoria::factory()->count(10)->create();
-        }
-        if (Material::count() === 0) {
-            Material::factory()->count(20)->create();
-        }
-
-        Subcategoria::factory()->count(30)->create();
+        // cria 3 subcategorias para cada categoria existente
+        Categoria::all()->each(function ($categoria) {
+            Subcategoria::factory(3)->create([
+                'categoria_id' => $categoria->id,
+            ]);
+        });
     }
 }

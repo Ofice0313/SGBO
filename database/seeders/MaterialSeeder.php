@@ -14,7 +14,18 @@ class MaterialSeeder extends Seeder
      */
     public function run(): void
     {
-        Material::factory()->count(20)->create();
+        $subcategorias = Subcategoria::all();
+
+        if ($subcategorias->count() === 0) {
+            $this->command->warn('Nenhuma subcategoria encontrada. Pulei o MaterialSeeder.');
+            return;
+        }
+
+        // Cria 20 materiais com subcategoria atribuída
+        Material::factory(20)->make()->each(function ($material) use ($subcategorias) {
+            $material->subcategoria_id = $subcategorias->random()->id;
+            $material->save();
+        });
     }
 
 }

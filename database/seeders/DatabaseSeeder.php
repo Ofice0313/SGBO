@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         // // ]);
 
        $this->call([
-            MaterialSeeder::class,          // 1. Material não depende de ninguém
             CategoriaSeeder::class,         // 2. Categoria não depende de ninguém
             SubcategoriaSeeder::class,      // 3. Subcategoria depende de Material e Categoria (já criados)
+            MaterialSeeder::class,          // 1. Material não depende de ninguém
             CursoSeeder::class,             // 4. Curso é independente
             RoleSeeder::class,              // 5. Role é independente
             UsersTableSeeder::class,        // 6. User depende de Curso

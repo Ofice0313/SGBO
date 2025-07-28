@@ -24,6 +24,9 @@ class MaterialFactory extends Factory
             'caminho_do_arquivo' => $this->faker->filePath(),
             'caminho_da_imagem' => $this->faker->imageUrl(640, 480, 'books'),
             'paginas' => $this->faker->numberBetween(50, 1000),
+            'minutos' => $this->faker->optional()->numberBetween(30, 120),
+            'caminho_do_audio' => $this->faker->optional()->filePath(),
+            
             'tipo' => $this->faker->randomElement(['LIVRO', 'AUDIOLIVRO']),
             'status_material' => $this->faker->randomElement(['DISPONIVEL', 'INDISPONIVEL']),
             'created_at' => now(),
