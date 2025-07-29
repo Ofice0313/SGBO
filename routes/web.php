@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\MaterialController;
 use App\Http\Controllers\Admin\CursoController;
+use App\Http\Controllers\Admin\EmprestimoController;
 use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\Main;
 use Illuminate\Support\Facades\Route;
@@ -74,6 +75,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/{categoria}/edit', [CategoriaController::class, 'edit'])->name('edit');
             Route::put('/{categoria}/update', [CategoriaController::class, 'update'])->name('update');
             Route::delete('/{categoria}/destroy', [CategoriaController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('emprestimos')->name('emprestimos.')->group(function(){
+            Route::get('/', [EmprestimoController::class, 'index'])->name('index');
+            Route::get('/create', [EmprestimoController::class, 'create'])->name('create');
+            Route::post('/store', [EmprestimoController::class, 'store'])->name('store');
+            Route::get('/{emprestimo}/edit', [EmprestimoController::class, 'edit'])->name('edit');
+            Route::put('/{emprestimo}/update', [EmprestimoController::class, 'update'])->name('update');
+            Route::delete('/{emprestimo}/destroy', [EmprestimoController::class, 'destroy'])->name('destroy');
         });
 });
 

@@ -32,6 +32,11 @@ class Emprestimo extends Model
         return $this->hasOne(HistoricoDeEmprestimo::class);
     }
 
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
