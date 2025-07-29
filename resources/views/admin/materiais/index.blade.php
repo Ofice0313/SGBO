@@ -25,7 +25,7 @@
                     <td>{{ $material->tipo }}</td>
                     <td class="d-flex align-items-center gap-2">
 
-                        <form action="" method="POST" style="display:inline;"
+                        <form action="{{ route('admin.materiais.destroy', $material->id) }}" method="POST" style="display:inline;"
                             onsubmit="return confirm('Tem certeza que deseja excluir este material?')">
                             @csrf
                             @method('DELETE')
@@ -41,7 +41,7 @@
                             </button>
                         </form>
 
-                        <a href="" class="text-decoration-none text-dark">
+                        <a href="{{ route('admin.materiais.edit', ['material' => $material->id])}}" class="text-decoration-none text-dark">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path

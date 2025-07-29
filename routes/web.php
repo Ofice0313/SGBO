@@ -37,6 +37,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/create', [MaterialController::class, 'create'])->name('create');
             Route::get('/tela_de_livros', [MaterialController::class, 'tela_de_livros'])->name('tela_de_livros');
             Route::post('/store', [MaterialController::class, 'store'])->name('store');
+            Route::get('/{material}/edit', [MaterialController::class, 'edit'])->name('edit');
+            Route::put('/{material}/update', [MaterialController::class, 'update'])->name('update');
+            Route::delete('/{material}/destroy', [MaterialController::class, 'destroy'])->name('destroy');
         });
         
         Route::prefix('dashboard')->name('dashboard.')->group(function(){

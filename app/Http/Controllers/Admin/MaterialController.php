@@ -194,7 +194,9 @@ class MaterialController extends Controller
 
     public function edit(Material $material)
     {
-        return view('editar_material', compact('material'));
+        $categorias = Categoria::all();
+        $subcategorias = Subcategoria::with('categoria')->get();
+        return view('admin.materiais.editar_material', compact('material', 'categorias', 'subcategorias'));
     }
 
     public function update(Request $request, Material $material)
@@ -213,7 +215,7 @@ class MaterialController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        $material = new Material();
+        //$material = new Material();
         $material->titulo = $request->titulo;
         $material->autor = $request->autor;
         $material->editora = $request->editora;
@@ -237,7 +239,7 @@ class MaterialController extends Controller
             $pdfFile = $request->file('caminho_do_arquivo');
             $pdfName = Str::uuid() . '.pdf';
             $pdfFile->storeAs('private/books', $pdfName);
-            $material->pdf_path = $pdfName;
+            $material->caminho_do_arquivo = $pdfName;
         }
 
         // Atualizar áudio se fornecido
@@ -274,7 +276,7 @@ class MaterialController extends Controller
 
         $material->save();
 
-        return redirect()->route('materiais.visualizar', $material)->with('success', 'Livro atualizado com sucesso!');
+        return redirect()->route('admin.materiais.index', $material)->with('success', 'Livro atualizado com sucesso!');
     }
 
     public function destroy(Material $material)
@@ -303,7 +305,7 @@ class MaterialController extends Controller
 
         $material->delete();
 
-        return redirect()->route('material.index')->with('success', 'Livro removido com sucesso!');
+        return redirect()->route('admin.materiais.index')->with('success', 'Livro removido com sucesso!');
     }
     
 }
