@@ -1,8 +1,7 @@
 <?php
 use App\Http\Controllers\Admin\MaterialController;
+use App\Http\Controllers\Admin\CursoController;
 use App\Http\Controllers\Main;
-use App\Http\Middleware\VerificaAdmin;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -44,6 +43,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
         
         Route::prefix('dashboard')->name('dashboard.')->group(function(){
             Route::get('/admin', [Main::class, 'dashboard_admin'])->name('dashboard_admin');
+        });
+
+        Route::prefix('cursos')->name('cursos.')->group(function(){
+            Route::get('/', [CursoController::class, 'index'])->name('index');
+            Route::get('/create', [CursoController::class, 'create'])->name('create');
+            Route::post('/store', [CursoController::class, 'store'])->name('store');
+            Route::get('/{curso}/edit', [CursoController::class, 'edit'])->name('edit');
+            Route::put('/{curso}/update', [CursoController::class, 'update'])->name('update');
+            Route::get('/{curso}/cursos', [CursoController::class, 'cursos'])->name('cursos');
         });
 });
 

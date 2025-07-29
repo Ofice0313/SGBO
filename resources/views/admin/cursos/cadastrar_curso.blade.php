@@ -11,7 +11,7 @@
             <!-- Formulário -->
             <div class="col-md-6">
                 <h2 class="text-center mb-4 fw-bold">Registrar curso</h2>
-                <form action="{{ route('cadastro_curso') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.materiais.create') }}"  method="POST" enctype="multipart/form-data">
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>

@@ -1,6 +1,8 @@
+@extends('templates/registro_de_material_layout')
+@section('content')
 <h1 class="h3 fw-bold mb-4">Cursos</h1>
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <form class="d-flex" style="max-width: 400px;" method="GET" action="{{ route('cursos') }}">
+    <form class="d-flex" style="max-width: 400px;" method="GET" action="{{ route('admin.cursos.cursos') }}">
         <input class="form-control me-2" type="search" name="q" value="{{ request('q') }}"
             placeholder="Pesquisar usuário..." aria-label="Pesquisar">
         <button class="btn btn-outline-secondary" type="submit">
@@ -11,7 +13,7 @@
             </svg>
         </button>
     </form>
-    <a href="{{ route('cadastro_curso') }}" class="btn btn-primary">
+    <a href="{{ route('admin.cursos.create') }}" class="btn btn-primary">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             class="bi bi-person-plus" viewBox="0 0 16 16">
             <path
@@ -37,7 +39,7 @@
                     <td>{{ $curso->id }}</td>
                     <td>{{ $curso->nome }}</td>
                     <td class="d-flex align-items-center gap-2">
-                        <form action="{{ route('curso.destroy', $curso->id) }}" method="POST" style="display:inline;"
+                        <form action="{{ route('admin.cursos.destroy', $curso->id) }}" method="POST" style="display:inline;"
                             onsubmit="return confirm('Tem certeza que deseja excluir este curso?')">
                             @csrf
                             @method('DELETE')
@@ -53,7 +55,7 @@
                             </button>
                         </form>
 
-                        <a href="{{ route('curso.edit', $curso->id) }}" class="text-decoration-none text-dark">
+                        <a href="{{ route('admin.cursos.edit', $curso->id) }}" class="text-decoration-none text-dark">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path
@@ -77,3 +79,4 @@
         </tbody>
     </table>
 </div>
+@endsection

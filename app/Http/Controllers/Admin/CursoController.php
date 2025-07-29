@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Curso;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CursoController extends Controller
 {
@@ -30,7 +31,10 @@ class CursoController extends Controller
 
     public function create()
     {
-        return view('cursos.create');
+        $data = [
+            'title' => 'Cadastrar Curso',
+        ];
+        return view('admin.cursos.cadastrar_curso', compact('data'));
     }
 
     public function store(Request $request)
@@ -46,7 +50,7 @@ class CursoController extends Controller
         return redirect()->route('cursos')->with('success', 'Curso criado com sucesso!');
     }
 
-    public function editar_curso(Curso $curso)
+    public function edit(Curso $curso)
     {
         $data = [
             'title' => 'Editar Curso',
@@ -65,12 +69,12 @@ class CursoController extends Controller
             'nome' => $request->nome
         ]);
 
-        return redirect()->route('cursos')->with('success', 'Curso atualizado com sucesso!');
+        return redirect()->route('admin.cursos.index')->with('success', 'Curso atualizado com sucesso!');
     }
 
     public function destroy(Curso $curso)
     {
         $curso->delete();
-        return redirect()->route('cursos')->with('success', 'Curso excluído com sucesso!');
+        return redirect()->route('admin.cursos.index')->with('success', 'Curso excluído com sucesso!');
     }
 }
