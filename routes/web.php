@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\MaterialController;
 use App\Http\Controllers\Admin\CursoController;
 use App\Http\Controllers\Admin\UsuarioController;
@@ -63,6 +65,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/{id}/edit', [UsuarioController::class, 'edit'])->name('edit');
             Route::put('/{id}/update', [UsuarioController::class, 'update'])->name('update');
             Route::delete('/{id}/destroy', [UsuarioController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('categorias')->name('categorias.')->group(function(){
+            Route::get('/', [CategoriaController::class, 'index'])->name('index');
+            Route::get('/create', [CategoriaController::class, 'create'])->name('create');
+            Route::post('/store', [CategoriaController::class, 'store'])->name('store');
+            Route::get('/{categoria}/edit', [CategoriaController::class, 'edit'])->name('edit');
+            Route::put('/{categoria}/update', [CategoriaController::class, 'update'])->name('update');
+            Route::delete('/{categoria}/destroy', [CategoriaController::class, 'destroy'])->name('destroy');
         });
 });
 
