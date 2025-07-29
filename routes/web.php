@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Admin\MaterialController;
 use App\Http\Controllers\Admin\CursoController;
+use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\Main;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/{curso}/edit', [CursoController::class, 'edit'])->name('edit');
             Route::put('/{curso}/update', [CursoController::class, 'update'])->name('update');
             Route::get('/{curso}/cursos', [CursoController::class, 'cursos'])->name('cursos');
+            Route::delete('/{curso}/destroy', [CursoController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('usuarios')->name('usuarios.')->group(function(){
+            Route::get('/', [UsuarioController::class, 'usuarios'])->name('index');
+            Route::get('/create', [UsuarioController::class, 'create'])->name('create');
+            Route::post('/store', [UsuarioController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [UsuarioController::class, 'edit'])->name('edit');
+            Route::put('/{id}/update', [UsuarioController::class, 'update'])->name('update');
+            Route::delete('/{id}/destroy', [UsuarioController::class, 'destroy'])->name('destroy');
         });
 });
 

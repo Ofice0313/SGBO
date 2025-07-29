@@ -64,4 +64,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Material::class, 'emprestimos');
     }
+
+    public function emprestimos()
+{
+    return $this->hasMany(Emprestimo::class);
+}
+
 }

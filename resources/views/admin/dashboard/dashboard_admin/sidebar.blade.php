@@ -23,7 +23,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="">
+                data-url="{{ route('admin.usuarios.index') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-people" viewBox="0 0 16 16">
                     <path
@@ -42,7 +42,7 @@
                 Empréstimos
             </a>
 
-            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+            <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-tag" viewBox="0 0 16 16">
                     <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0" />
@@ -52,7 +52,7 @@
                 Categoria
             </a>
 
-            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+            <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     viewBox="0 0 256 256">
                     <path
@@ -62,7 +62,7 @@
                 Logs
             </a>
 
-            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+            <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     viewBox="0 0 256 256">
                     <path
@@ -72,7 +72,7 @@
                 Relatórios
             </a>
 
-            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-2">
+            <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-gear" viewBox="0 0 16 16">
                     <path
@@ -83,8 +83,8 @@
                 Configurações
             </a>
 
-            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-2"
-                data-url="">
+            <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
+                data-url="{{ route('admin.cursos.index')}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-mortarboard" viewBox="0 0 16 16">
                     <path
@@ -95,7 +95,7 @@
                 Cursos
             </a>
 
-            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-2"
+            <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
                 class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                     class="bi bi-box-arrow-right" viewBox="0 0 16 16">

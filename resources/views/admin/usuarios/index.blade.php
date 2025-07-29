@@ -1,6 +1,6 @@
 @extends('templates/registro_de_material_layout')
 @section('content')
-<h1 class="h3 fw-bold mb-4">Cursos</h1>
+<h1 class="h3 fw-bold mb-4">Gerenciamento de Usuários</h1>
 <div class="d-flex justify-content-between align-items-center mb-3">
     <form class="d-flex" style="max-width: 400px;" method="GET" action="">
         <input class="form-control me-2" type="search" name="q" value=""
@@ -13,7 +13,7 @@
             </svg>
         </button>
     </form>
-    <a href="{{ route('admin.cursos.create') }}" class="btn btn-primary">
+    <a href="" class="btn btn-primary">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             class="bi bi-person-plus" viewBox="0 0 16 16">
             <path
@@ -21,26 +21,31 @@
             <path
                 d="M15 8a.5.5 0 0 1-.5.5H13v1.5a.5.5 0 0 1-1 0V8.5h-1.5a.5.5 0 0 1 0-1H12V6a.5.5 0 0 1 1 0v1.5h1.5A.5.5 0 0 1 15 8z" />
         </svg>
-        Adicionar curso
+        Adicionar Usuário
     </a>
 </div>
 <div class="table-responsive">
     <table class="table align-middle">
         <thead class="table-light">
             <tr>
-                <th>Id</th>
-                <th>Nome do Curso</th>
+                <th>Estudantes</th>
+                <th>Curso</th>
+                <th>Status</th>
+                <th>Empréstimos</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($cursos as $curso)
+            @foreach ($usuarios as $usuario)
                 <tr>
-                    <td>{{ $curso->id }}</td>
-                    <td>{{ $curso->nome }}</td>
+                    <td>{{ $usuario->nome }}</td>
+                    <td>{{ $usuario->curso ? $usuario->curso->nome : $usuario->curso_id }}</td>
+                    <td>{{ $usuario->status ? 'Ativo' : 'Inativo' }}</td>
+                    <td>{{ $usuario->emprestimos_count ?? 0 }}</td>
                     <td class="d-flex align-items-center gap-2">
-                        <form action="{{ route('admin.cursos.destroy', $curso->id) }}" method="POST" style="display:inline;"
-                            onsubmit="return confirm('Tem certeza que deseja excluir este curso?')">
+                        <form action="{{ route('admin.usuarios.destroy', $usuario->id) }}" method="POST"
+                            style="display:inline;"
+                            onsubmit="return confirm('Tem certeza que deseja excluir este usuário?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-link text-decoration-none text-dark p-0 m-0"
@@ -55,7 +60,7 @@
                             </button>
                         </form>
 
-                        <a href="{{ route('admin.cursos.edit', $curso->id) }}" class="text-decoration-none text-dark">
+                        <a href="{{ route('admin.usuarios.edit', $usuario->id) }}" class="text-decoration-none text-dark">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path
