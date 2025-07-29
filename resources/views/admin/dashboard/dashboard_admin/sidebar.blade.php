@@ -43,6 +43,16 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
+                data-url="{{ route('admin.emprestimos.index') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
+                    class="bi bi-bookmark" viewBox="0 0 16 16">
+                    <path
+                        d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z" />
+                </svg>
+                Historico de Empréstimos
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
                 data-url="{{ route('admin.categorias.index') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-tag" viewBox="0 0 16 16">
@@ -51,6 +61,17 @@
                         d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1m0 5.586 7 7L13.586 9l-7-7H2z" />
                 </svg>
                 Categoria
+            </a>
+
+            <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
+                data-url="{{ route('admin.subcategorias.index') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
+                    class="bi bi-tag" viewBox="0 0 16 16">
+                    <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0" />
+                    <path
+                        d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1m0 5.586 7 7L13.586 9l-7-7H2z" />
+                </svg>
+                Subcategoria
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2">

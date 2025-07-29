@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\MaterialController;
 use App\Http\Controllers\Admin\CursoController;
 use App\Http\Controllers\Admin\EmprestimoController;
+use App\Http\Controllers\Admin\SubcategoriaController;
 use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\Main;
 use Illuminate\Support\Facades\Route;
@@ -84,6 +85,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/{emprestimo}/edit', [EmprestimoController::class, 'edit'])->name('edit');
             Route::put('/{emprestimo}/update', [EmprestimoController::class, 'update'])->name('update');
             Route::delete('/{emprestimo}/destroy', [EmprestimoController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('subcategorias')->name('subcategorias.')->group(function(){
+            Route::get('/', [SubcategoriaController::class, 'index'])->name('index');
+            Route::get('/create', [SubcategoriaController::class, 'create'])->name('create');
+            Route::post('/store', [SubcategoriaController::class, 'store'])->name('store');
+            Route::get('/{subcategoria}/edit', [SubcategoriaController::class, 'edit'])->name('edit');
+            Route::put('/{subcategoria}/update', [SubcategoriaController::class, 'update'])->name('update');
+            Route::delete('/{subcategoria}/destroy', [SubcategoriaController::class, 'destroy'])->name('destroy');
         });
 });
 
