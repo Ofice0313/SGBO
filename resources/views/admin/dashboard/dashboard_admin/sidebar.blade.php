@@ -33,7 +33,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('emprestimos.index') }}">
+                data-url="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-bookmark" viewBox="0 0 16 16">
                     <path
@@ -84,7 +84,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-2"
-                data-url="{{ route('emprestimos.index') }}">
+                data-url="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-mortarboard" viewBox="0 0 16 16">
                     <path
@@ -95,7 +95,7 @@
                 Cursos
             </a>
 
-            <a href="{{ route('logout') }}"
+            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-2"
                 class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                     class="bi bi-box-arrow-right" viewBox="0 0 16 16">

@@ -11,9 +11,9 @@
 </head>
 <body class="bg-white">
     <div class="d-flex flex-column min-vh-100">
-        @include('nav')
+        @include('admin/dashboard/dashboard_admin/nav')
         <div class="container-fluid flex-grow-1 d-flex">
-            @include('sidebar')
+            @include('admin/dashboard/dashboard_admin/sidebar')
             <main class="flex-grow-1 p-4" id="main-content">
                 @yield('content')
             </main>
