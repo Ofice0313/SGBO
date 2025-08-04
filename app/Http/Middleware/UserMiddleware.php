@@ -19,7 +19,7 @@ class UserMiddleware
     {
         if(Auth::check()){
             //verifica se o usuário tem o papel de User
-            if (Auth::user()->isUser === Role::User) {
+            if (Auth::user()->role == "USER") {
                 return $next($request);
             }else
             {

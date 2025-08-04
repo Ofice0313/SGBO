@@ -12,6 +12,7 @@
             <div class="col-md-6">
                 <h2 class="text-center mb-4 fw-bold">Registrar-me</h2>
                 <form action="{{ route('cadastrar_usuario') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>

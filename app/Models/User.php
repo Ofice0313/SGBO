@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Enums\Role;
+use App\Models\Role as RoleModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,6 +27,7 @@ class User extends Authenticatable
         'telefone',
         'status',
         'instituicao',
+        'role',
         'email_verified_at',
         'password',
     ];
@@ -58,11 +60,6 @@ class User extends Authenticatable
         return $this->belongsTo(Curso::class);
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'role_user');
-    }
-
     public function materiais()
     {
         return $this->belongsToMany(Material::class, 'emprestimos');
@@ -73,23 +70,4 @@ class User extends Authenticatable
         return $this->hasMany(Emprestimo::class);
     }
 
-    // public function hasRole($role)
-    // {
-    //     return $this->roles->contains('role', $role)->exists();
-    // }
-
-     public function isAdmin(): bool
-    {
-        return $this->role === Role::Admin;
-    }
-
-    public function isUser(): bool
-    {
-        return $this->role === Role::User;
-    }
-
-    public function hasRole(Role $role): bool
-    {
-        return $this->role === $role;
-    }
 }

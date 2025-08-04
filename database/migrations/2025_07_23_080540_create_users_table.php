@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('telefone')->nullable();
             $table->enum('status', ['ATIVO', 'INATIVO'])->default('ATIVO');
             $table->enum('instituicao', ['LORE', 'FOCO', 'ISLORE']);
+            $table->enum('role', ['ADMIN', 'USER'])->default('USER');
             $table->timestamps();
             $table->dateTime('deleted_at')->nullable(true)->default(null);
             $table->timestamp('email_verified_at')->nullable();

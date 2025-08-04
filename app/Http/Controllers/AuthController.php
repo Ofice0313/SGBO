@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
 use App\Models\Curso;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -31,7 +33,20 @@ class AuthController extends Controller
             'password.min' => 'A senha deve ter no mínimo 5 caracteres.',
         ]);
 
-        return redirect()->route('cadastar_usuario')->with('success', 'Conta criada com sucesso! Faça login.');
+        if(Auth::attempt(['email' => $request->email, 'instituicao' => $request->instituicao, 'password' => $request->password], true))
+        {
+            if(Auth::User()->role == "USER")
+            {
+                echo "Is User";die();
+            }else if(Auth::User()->role == "ADMIN")
+            {
+                echo "Is Admin";die();
+            }else{
+                return redirect()->route('login')->with('error', 'Credencias invalidas.');
+            }
+        }else{
+            return redirect()->back()->with('error', 'Digite os dados certos.');
+        }
     }
 
     public function create()

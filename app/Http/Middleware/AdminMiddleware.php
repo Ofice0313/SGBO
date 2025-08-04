@@ -2,11 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Enums\Role;
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminMiddleware
 {
@@ -18,7 +17,7 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            if(Auth::user()->isAdmin == Role::Admin)
+            if(Auth::user()->role == "ADMIN")
             {
                 return $next($request);
             }else
