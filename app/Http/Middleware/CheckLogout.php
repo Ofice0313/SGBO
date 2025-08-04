@@ -15,8 +15,8 @@ class CheckLogout
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(session()->has('username')){
-            return redirect()->route('index');
+        if(session()->has('email')){
+            return redirect()->route('admin.dashboard.dashboard');
         }
         return $next($request);
     }

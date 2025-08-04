@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('endereco')->nullable();
             $table->string('telefone')->nullable();
             $table->enum('status', ['ATIVO', 'INATIVO'])->default('ATIVO');
-            $table->enum('instituicao', ['LORE', 'FOCO', 'ISLORE'])->nullable();
+            $table->enum('instituicao', ['LORE', 'FOCO', 'ISLORE']);
             $table->timestamps();
             $table->dateTime('deleted_at')->nullable(true)->default(null);
             $table->timestamp('email_verified_at')->nullable();

@@ -5,8 +5,10 @@ namespace Database\Seeders;
 use App\Models\Emprestimo;
 use App\Models\Material;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class EmprestimoSeeder extends Seeder
 {
@@ -15,14 +17,62 @@ class EmprestimoSeeder extends Seeder
      */
     public function run(): void
     {
-        if (User::count() === 0) {
-            User::factory()->count(10)->create();
-        }
-        if (Material::count() === 0) {
-            Material::factory()->count(20)->create();
-        }
-
-        // Cria os emprestimos
-        Emprestimo::factory()->count(30)->create();
+        DB::table('emprestimos')->insert([
+            [
+                'user_id' => 1,
+                'material_id' => 1,
+                'data_de_retirada' => Carbon::now()->subDays(10),
+                'data_de_devolucao' => Carbon::now()->addDays(5),
+                'notificacao' => 'Nenhuma',
+                'status_emprestimo' => 'EMPRESTADO',
+                'multa' => 0.00,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'user_id' => 2,
+                'material_id' => 2,
+                'data_de_retirada' => Carbon::now()->subDays(15),
+                'data_de_devolucao' => Carbon::now()->addDays(2),
+                'notificacao' => 'Atraso previsto',
+                'status_emprestimo' => 'PENDENTE',
+                'multa' => 5.00,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'user_id' => 3,
+                'material_id' => 3,
+                'data_de_retirada' => Carbon::now()->subDays(5),
+                'data_de_devolucao' => Carbon::now()->addDays(7),
+                'notificacao' => 'Em tempo',
+                'status_emprestimo' => 'PENDENTE',
+                'multa' => 0.00,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'user_id' => 4,
+                'material_id' => 4,
+                'data_de_retirada' => Carbon::now()->subDays(20),
+                'data_de_devolucao' => Carbon::now()->subDays(2),
+                'notificacao' => 'Devolvido com atraso',
+                'status_emprestimo' => 'DEVOLVIDO',
+                'multa' => 10.00,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'user_id' => 5,
+                'material_id' => 5,
+                'data_de_retirada' => Carbon::now()->subDays(2),
+                'data_de_devolucao' => Carbon::now()->addDays(10),
+                'notificacao' => 'Nova retirada',
+                'status_emprestimo' => 'EMPRESTADO',
+                'multa' => 0.00,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+        ]);
     }
 }
