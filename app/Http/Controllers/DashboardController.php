@@ -10,10 +10,12 @@ class DashboardController extends Controller
     public function dashboard(){
         if(Auth::User()->role == "USER")
         {
-            echo "U";die();
+            $data['meta_title'] = 'Dashboard do Usuário';
+            return view('user.dashboard_do_usuario', compact('data'));
         }else if(Auth::User()->role == "ADMIN")
         {
-            echo "A";die();
+            $data['meta_title'] = 'Dashboard do Administrador';
+            return view('admin.dashboard.dashboard_admin.dashboard_visao_geral', compact('data'));
         }
     }
 }

@@ -13,7 +13,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('admin.materiais.index') }}">
+                data-url="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-book" viewBox="0 0 16 16">
                     <path
@@ -23,7 +23,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('admin.usuarios.index') }}">
+                data-url="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-people" viewBox="0 0 16 16">
                     <path
@@ -33,7 +33,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('admin.emprestimos.index') }}">
+                data-url="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-bookmark" viewBox="0 0 16 16">
                     <path
@@ -43,7 +43,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('admin.emprestimos.index') }}">
+                data-url="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-bookmark" viewBox="0 0 16 16">
                     <path
@@ -53,7 +53,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('admin.categorias.index') }}">
+                data-url="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-tag" viewBox="0 0 16 16">
                     <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0" />
@@ -64,7 +64,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('admin.subcategorias.index') }}">
+                data-url="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-tag" viewBox="0 0 16 16">
                     <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0" />
@@ -106,7 +106,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('admin.cursos.index')}}">
+                data-url="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-mortarboard" viewBox="0 0 16 16">
                     <path
