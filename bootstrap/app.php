@@ -1,6 +1,9 @@
 <?php
 
 // bootstrap/app.php (Laravel 11)
+
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\UserMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,8 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // Registrar middlewares customizados
         $middleware->alias([
-            'check.auth' => \App\Http\Middleware\CheckAuth::class,
-            'check.role' => \App\Http\Middleware\CheckRole::class,
+            'Admin' => AdminMiddleware::class,
+            'User' => UserMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
