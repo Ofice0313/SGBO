@@ -37,10 +37,10 @@ class AuthController extends Controller
         {
             if(Auth::User()->role == "USER")
             {
-                echo "Is User";die();
+                return redirect()->intended('user/dashboard');
             }else if(Auth::User()->role == "ADMIN")
             {
-                echo "Is Admin";die();
+                return redirect()->intended('admin/dashboard');
             }else{
                 return redirect()->route('login')->with('error', 'Credencias invalidas.');
             }

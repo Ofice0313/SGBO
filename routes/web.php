@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\{CheckRole, CheckAuth};
 use App\Enums\Role;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -66,6 +67,13 @@ Route::post('login_submit', [AuthController::class, 'login_submit'])->name('logi
 Route::get('/create', [AuthController::class, 'create']);
 Route::post('/cadastrar_usuario', [AuthController::class, 'cadastrar_usuario'])->name('cadastrar_usuario');
 
+Route::group(['middleware' => 'Admin'], function(){
+    Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
+});
+
+Route::group(['middleware' => 'User'], function(){
+    Route::get('user/dashboard', [DashboardController::class, 'dashboard']);
+});
 
 // // Rotas públicas
 // Route::get('/login', [LoginController::class, 'login'])->name('login');
