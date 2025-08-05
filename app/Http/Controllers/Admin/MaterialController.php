@@ -305,7 +305,7 @@ class MaterialController extends Controller
 
         $material->delete();
 
-        return redirect()->route('admin.materiais.index')->with('success', 'Livro removido com sucesso!');
+        return redirect()->route('materiais.index')->with('success', 'Livro removido com sucesso!');
     }
     
 }

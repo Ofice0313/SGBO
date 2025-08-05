@@ -15,7 +15,7 @@
                 <!-- Formulário -->
                 <div class="col-lg-8">
                     <h2 class="h5 fw-semibold text-center mb-4">Editar Material</h2>
-                    <form action="{{ route('admin.materiais.update', $material->id) }}" method="POST"
+                    <form action="{{ route('materiais.update', $material->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

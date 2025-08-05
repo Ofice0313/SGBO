@@ -100,6 +100,15 @@ Route::get('logout', [AuthController::class, 'logout']);
 
 Route::group(['middleware' => 'Admin'], function(){
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
+
+    //Materias 
+    Route::get('/', [MaterialController::class, 'index'])->name('materiais.index');
+    Route::get('/create', [MaterialController::class, 'create'])->name('materiais.create');
+    Route::get('/tela_de_livros', [MaterialController::class, 'tela_de_livros'])->name('tela_de_livros');
+    Route::post('/store', [MaterialController::class, 'store'])->name('store');
+    Route::get('/{material}/edit', [MaterialController::class, 'edit'])->name('materiais.edit');
+    Route::put('/{material}/update', [MaterialController::class, 'update'])->name('materiais.update');
+    Route::delete('/{material}/destroy', [MaterialController::class, 'destroy'])->name('materiais.destroy');
 });
 
 Route::group(['middleware' => 'User'], function(){
