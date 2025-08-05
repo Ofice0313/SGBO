@@ -188,7 +188,7 @@ class MaterialController extends Controller
 
         $material->save();
 
-        return redirect()->route('admin.materiais.index')->with('success', 'Livro adicionado com sucesso!');
+        return redirect()->route('materiais.index')->with('success', 'Livro adicionado com sucesso!');
     }
 
 
@@ -276,7 +276,7 @@ class MaterialController extends Controller
 
         $material->save();
 
-        return redirect()->route('admin.materiais.index', $material)->with('success', 'Livro atualizado com sucesso!');
+        return redirect()->route('materiais.index', $material)->with('success', 'Livro atualizado com sucesso!');
     }
 
     public function destroy(Material $material)

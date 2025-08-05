@@ -27,17 +27,6 @@ Route::post('login_submit', [AuthController::class, 'login_submit'])->name('logi
 Route::get('/create', [AuthController::class, 'create']);
 Route::post('/cadastrar_usuario', [AuthController::class, 'cadastrar_usuario'])->name('cadastrar_usuario');
 
-//Gestão de Materiais
-Route::prefix('materiais')->name('materiais.')->group(function () {
-    Route::get('/', [MaterialController::class, 'index'])->name('index');
-    Route::get('/create', [MaterialController::class, 'create'])->name('create');
-    Route::get('/tela_de_livros', [MaterialController::class, 'tela_de_livros'])->name('tela_de_livros');
-    Route::post('/store', [MaterialController::class, 'store'])->name('store');
-    Route::get('/{material}/edit', [MaterialController::class, 'edit'])->name('edit');
-    Route::put('/{material}/update', [MaterialController::class, 'update'])->name('update');
-    Route::delete('/{material}/destroy', [MaterialController::class, 'destroy'])->name('destroy');
-});
-
 //Gestao de cursos
 Route::prefix('cursos')->name('cursos.')->group(function () {
     Route::get('/', [CursoController::class, 'index'])->name('index');
@@ -102,13 +91,26 @@ Route::group(['middleware' => 'Admin'], function(){
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
 
     //Materias 
-    Route::get('/', [MaterialController::class, 'index'])->name('materiais.index');
+    Route::get('/materiais', [MaterialController::class, 'index'])->name('materiais.index');
     Route::get('/create', [MaterialController::class, 'create'])->name('materiais.create');
     Route::get('/tela_de_livros', [MaterialController::class, 'tela_de_livros'])->name('tela_de_livros');
     Route::post('/store', [MaterialController::class, 'store'])->name('store');
     Route::get('/{material}/edit', [MaterialController::class, 'edit'])->name('materiais.edit');
     Route::put('/{material}/update', [MaterialController::class, 'update'])->name('materiais.update');
     Route::delete('/{material}/destroy', [MaterialController::class, 'destroy'])->name('materiais.destroy');
+
+    //Cursos
+
+    Route::prefix('cursos')->name('cursos.')->group(function () {
+        Route::get('/cursos', [CursoController::class, 'index'])->name('index');
+        Route::get('/create', [CursoController::class, 'create'])->name('create');
+        Route::post('/store', [CursoController::class, 'store'])->name('store');
+        Route::get('/{curso}/edit', [CursoController::class, 'edit'])->name('edit');
+        Route::put('/{curso}', [CursoController::class, 'update'])->name('update');
+        Route::get('/cursos', [CursoController::class, 'cursos'])->name('cursos');
+        Route::delete('/{curso}', [CursoController::class, 'destroy'])->name('destroy');
+    });
+
 });
 
 Route::group(['middleware' => 'User'], function(){

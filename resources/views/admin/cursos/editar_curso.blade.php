@@ -1,4 +1,4 @@
-@extends('templates/registro_de_material_layout')
+@extends('templates/cursos_layout')
 @section('content')
     <div class="bg-light p-5 rounded shadow-lg container max-w-4xl">
         <div class="row g-4">
@@ -11,7 +11,7 @@
             <!-- Formulário -->
             <div class="col-md-6">
                 <h2 class="text-center mb-4 fw-bold">Editar Curso</h2>
-                <form method="POST" action="{{ route('admin.cursos.update', $cursos->id) }}" >
+                <form method="POST" action="{{ route('cursos.update', $curso->id) }}" >
                     @csrf
                     @method('PUT')
                     <div class="row g-3 mb-3">

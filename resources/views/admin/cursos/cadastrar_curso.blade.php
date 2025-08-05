@@ -1,4 +1,4 @@
-@extends('templates/registro_de_material_layout')
+@extends('templates/cursos_layout')
 @section('content')
     <div class="bg-light p-5 rounded shadow-lg container max-w-4xl">
         <div class="row g-4">
@@ -11,7 +11,8 @@
             <!-- Formulário -->
             <div class="col-md-6">
                 <h2 class="text-center mb-4 fw-bold">Registrar curso</h2>
-                <form action="{{ route('admin.materiais.create') }}"  method="POST" enctype="multipart/form-data">
+                <form action="{{ route('cursos.store') }}"  method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>

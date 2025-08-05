@@ -11,16 +11,15 @@ class CursoController extends Controller
     public function cursos(Request $request)
     {
         $query = $request->input('q');
-        $cursos = Curso::withCount('usuarios');
+        $cursos = Curso::query();
         if ($query) {
-            $cursos = $cursos->where('nome', 'like', "%$query%")
-                ->orWhere('descricao', 'like', "%$query%");
+            $cursos = $cursos->where('nome', 'like', "%$query%");
         }
         $cursos = $cursos->get();
         $data = [
             'title' => 'cursos',
         ];
-        return view('cursos', array_merge($data, compact('cursos')));
+        return view('admin.cursos.index', array_merge($data, compact('cursos')));
     }
 
     public function index()
@@ -47,7 +46,7 @@ class CursoController extends Controller
             'nome' => $request->nome
         ]);
 
-        return redirect()->route('cursos')->with('success', 'Curso criado com sucesso!');
+        return redirect()->route('cursos.index')->with('success', 'Curso criado com sucesso!');
     }
 
     public function edit(Curso $curso)
@@ -69,12 +68,12 @@ class CursoController extends Controller
             'nome' => $request->nome
         ]);
 
-        return redirect()->route('admin.cursos.index')->with('success', 'Curso atualizado com sucesso!');
+        return redirect()->route('cursos.index')->with('success', 'Curso atualizado com sucesso!');
     }
 
     public function destroy(Curso $curso)
     {
         $curso->delete();
-        return redirect()->route('admin.cursos.index')->with('success', 'Curso excluído com sucesso!');
+        return redirect()->route('cursos.index')->with('success', 'Curso excluído com sucesso!');
     }
 }

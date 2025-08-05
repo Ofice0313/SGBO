@@ -16,7 +16,7 @@
                 <!-- Formulário -->
                 <div class="col-lg-8">
                     <h2 class="h5 fw-semibold text-center mb-4">Registrar Material</h2>
-                    <form action="{{ route('admin.materiais.store') }}" method="POST"
+                    <form action="{{ route('materiais.store') }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
