@@ -81,14 +81,18 @@ Route::prefix('subcategorias')->name('subcategorias.')->group(function () {
 });
 
 //Gestão de Empréstimos
-Route::prefix('emprestimos')->name('emprestimos.')->group(function () {
-    Route::get('/', [EmprestimoController::class, 'index'])->name('index');
-    Route::get('/create', [EmprestimoController::class, 'create'])->name('create');
-    Route::post('/store', [EmprestimoController::class, 'store'])->name('store');
-    Route::get('/{emprestimo}/edit', [EmprestimoController::class, 'edit'])->name('edit');
-    Route::put('/{emprestimo}/update', [EmprestimoController::class, 'update'])->name('update');
-    Route::delete('/{emprestimo}/destroy', [EmprestimoController::class, 'destroy'])->name('destroy');
-});
+
+// Route::get('/', [EmprestimoController::class, 'index'])->name('index');
+// Route::get('/create', [EmprestimoController::class, 'create'])->name('create');
+// Route::post('/store', [EmprestimoController::class, 'store'])->name('store');
+// Route::get('/{emprestimo}/edit', [EmprestimoController::class, 'edit'])->name('edit');
+// Route::put('/{emprestimo}/update', [EmprestimoController::class, 'update'])->name('update');
+// Route::delete('/{emprestimo}/destroy', [EmprestimoController::class, 'destroy'])->name('destroy');
+// Route::patch('/emprestimos/{id}/aprovar', [EmprestimoController::class, 'aprovar'])->name('emprestimos.aprovar');
+// Route::patch('/emprestimos/{id}/rejeitar', [EmprestimoController::class, 'rejeitar'])->name('emprestimos.rejeitar');
+// Route::get('/materiais/{id}/disponibilidade', [EmprestimoController::class, 'verificarDisponibilidade'])->name('materiais.verificarDisponibilidade');
+
+
 
 Route::get('forgot', [AuthController::class, 'forgot']);
 
@@ -99,5 +103,7 @@ Route::group(['middleware' => 'Admin'], function(){
 });
 
 Route::group(['middleware' => 'User'], function(){
-    Route::get('user/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('user/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/emprestimos/solicitar', [EmprestimoController::class, 'criar'])->name('emprestimos.criar');
+    Route::post('/emprestimos/solicitar', [EmprestimoController::class, 'solicitar'])->name('emprestimos.solicitar');
 });

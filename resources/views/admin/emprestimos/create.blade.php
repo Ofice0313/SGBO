@@ -12,11 +12,14 @@
         </select>
 
         <label>Material:</label>
-        <select name="material_id" class="form-control">
-            @foreach ($materiais as $m)
-                <option value="{{ $m->id }}">{{ $m->titulo }}</option>
+        <select name="material_id" id="material_id" class="form-control">
+            <option value="">-- Selecione um Material --</option>
+            @foreach ($materiais as $material)
+                <option value="{{ $material->id }}">{{ $material->titulo }}</option>
             @endforeach
         </select>
+
+        <div id="disponibilidade_msg" class="mt-2 text-sm fw-bold"></div>
 
         <label>Data de Retirada:</label>
         <input type="date" name="data_de_retirada" class="form-control">

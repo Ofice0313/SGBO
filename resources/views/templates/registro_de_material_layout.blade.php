@@ -26,6 +26,34 @@
 
     @yield('content')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('material_id').addEventListener('change', function() {
+            const materialId = this.value;
+            const msgDiv = document.getElementById('disponibilidade_msg');
+
+            if (!materialId) {
+                msgDiv.innerHTML = '';
+                return;
+            }
+
+            fetch(`/materiais/${materialId}/disponibilidade`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.disponivel) {
+                        msgDiv.innerHTML =
+                            `<span class="text-success">Disponível (${data.quantidade_disponivel} em estoque)</span>`;
+                    } else {
+                        msgDiv.innerHTML =
+                            `<span class="text-danger">Indisponível no momento. Todos os exemplares estão emprestados.</span>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao verificar disponibilidade:', error);
+                    msgDiv.innerHTML = `<span class="text-warning">Erro ao verificar disponibilidade.</span>`;
+                });
+        });
+    </script>
+
 </body>
 
 </html>

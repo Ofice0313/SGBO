@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('data_de_devolucao')->nullable();
             $table->decimal('multa', 8, 2)->default(0);
             $table->string('notificacao')->default(false);
-            $table->enum('status_emprestimo', ['PENDENTE', 'EMPRESTADO', 'DEVOLVIDO'])->default('PENDENTE');
+            $table->enum('status_emprestimo', ['PENDENTE', 'EMPRESTADO', 'DEVOLVIDO', 'REJEITADO'])->default('PENDENTE');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('material_id')->references('id')->on('materiais')->onDelete('set null');
             $table->timestamps();
