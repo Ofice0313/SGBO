@@ -16,41 +16,25 @@
                     <h1 class="h4 fw-bold text-dark mt-2">Biblioteca Online</h1>
                 </div>
 
-                <form method="POST" action="{{ route('login_submit') }}">
+                <form action="">
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label text-dark">Email</label>
                         <input type="email" class="form-control" id="email" name="email"
                             placeholder="Digite o teu email">
                     </div>
-                    <div class="mb-3">
-                        <label for="instituicao" class="form-label text-dark">Instituição</label>
-                        <div class="select-wrapper">
-                            <select name="instituicao" id="instituicao" class="form-select" required>
-                                <option value="">Selecione</option>
-                                <option value="LORE">Lore</option>
-                                <option value="ISLORE">IsLore</option>
-                                <option value="FOCO">FOCO</option>
-                            </select>
-                            <span class="material-icons text-secondary">expand_more</span>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="password" class="form-label text-dark">Password</label>
-                        <input type="password" class="form-control" name="password" id="password"
-                            placeholder="Digite o password">
-                    </div>
-                    <button type="submit" class="btn btn-dark w-100">Login</button>
+                    
+                    <button type="submit" class="btn btn-dark w-100">Enviar email</button>
                 </form>
 
                 <p class="text-center mt-4 small">Não tem uma conta?
                     <a class="text-primary text-decoration-none" href="{{ url('create')}}">
                         Criar conta</a>
                 </p>
-            
-                <p class="text-center mt-4 small">Esqueceu o password?
-                    <a class="text-primary text-decoration-none" href="{{ url('forgot')}}">
-                        Recuperar senha</a>
+                <br>
+                <p class="text-center mt-4 small">Tens uma conta?
+                    <a class="text-primary text-decoration-none" href="{{ url('login')}}">
+                        Entrar</a>
                 </p>
             </div>
         </div>

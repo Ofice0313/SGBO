@@ -89,5 +89,16 @@ class AuthController extends Controller
 
         return redirect()->route('login')->with('success', 'Conta criada com sucesso! Faça login.');
     }
+
+     public function forgot(){
+        $data['meta_title'] = 'Esqueceu a Palavra Passe';
+        return view('auth.forgot_password', $data);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(url('/login'));
+    }
       
 }

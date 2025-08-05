@@ -90,7 +90,9 @@ Route::prefix('emprestimos')->name('emprestimos.')->group(function () {
     Route::delete('/{emprestimo}/destroy', [EmprestimoController::class, 'destroy'])->name('destroy');
 });
 
+Route::get('forgot', [AuthController::class, 'forgot']);
 
+Route::get('logout', [AuthController::class, 'logout']);
 
 Route::group(['middleware' => 'Admin'], function(){
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
