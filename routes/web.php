@@ -52,11 +52,11 @@ Route::prefix('cursos')->name('cursos.')->group(function () {
 // Gestão de Categorias
 Route::prefix('categorias')->name('categorias.')->group(function () {
     Route::get('/', [CategoriaController::class, 'index'])->name('index');
-    // Route::get('/create', [CategoriaController::class, 'create'])->name('create');
-    // Route::post('/store', [CategoriaController::class, 'store'])->name('store');
-    // Route::get('/{categoria}/edit', [CategoriaController::class, 'edit'])->name('edit');
-    // Route::put('/{categoria}/update', [CategoriaController::class, 'update'])->name('update');
-    // Route::delete('/{categoria}/destroy', [CategoriaController::class, 'destroy'])->name('destroy');
+    Route::get('/create', [CategoriaController::class, 'create'])->name('create');
+    Route::post('/store', [CategoriaController::class, 'store'])->name('store');
+    Route::get('/{categoria}/edit', [CategoriaController::class, 'edit'])->name('edit');
+    Route::put('/{categoria}/update', [CategoriaController::class, 'update'])->name('update');
+    Route::delete('/{categoria}/destroy', [CategoriaController::class, 'destroy'])->name('destroy');
 });
 
 //Gestão de subcategorias

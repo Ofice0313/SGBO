@@ -14,7 +14,7 @@
             </button>
         </form>
 
-        <a href="" class="btn btn-primary">
+        <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCategoria">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-person-plus" viewBox="0 0 16 16">
                 <path
@@ -25,6 +25,37 @@
             Adicionar Categoria
         </a>
     </div>
+
+    <!-- Modal Categoria -->
+    <div class="modal fade" id="modalCategoria" tabindex="-1" aria-labelledby="modalCategoriaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCategoriaLabel">Cadastrar Categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('categorias.store')}}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome da Categoria</label>
+                            <input type="text" name="nome" id="nome" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
+    @endif
+
+
     <div class="table-responsive">
         <table class="table align-middle">
             <thead class="table-light">
@@ -40,7 +71,7 @@
                         <td>{{ $categoria->id }}</td>
                         <td>{{ $categoria->nome }}</td>
                         <td class="d-flex align-items-center gap-2">
-                            <form action="" method="POST" style="display:inline;"
+                            <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" style="display:inline;"
                                 onsubmit="return confirm('Tem certeza que deseja excluir este categoria?')">
                                 @csrf
                                 @method('DELETE')
@@ -56,7 +87,7 @@
                                 </button>
                             </form>
 
-                            <a href="" class="text-decoration-none text-dark">
+                            <a href="" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#modalEditarCategoria{{ $categoria->id }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path
@@ -79,4 +110,30 @@
             </tbody>
         </table>
     </div>
+
+    @foreach ($categorias as $categoria)
+    <!-- Modal Editar Categoria -->
+    <div class="modal fade" id="modalEditarCategoria{{ $categoria->id }}" tabindex="-1" aria-labelledby="modalEditarCategoriaLabel{{ $categoria->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditarCategoriaLabel{{ $categoria->id }}">Editar Categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('categorias.update', $categoria->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                            <label for="nome{{ $categoria->id }}" class="form-label">Nome da Categoria</label>
+                            <input type="text" name="nome" id="nome{{ $categoria->id }}" class="form-control" value="{{ $categoria->nome }}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
 @endsection

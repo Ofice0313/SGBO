@@ -1,28 +1,24 @@
 @extends('templates/categorias_layout')
 @section('content')
-    <div class="bg-light p-5 rounded shadow-lg container max-w-4xl">
-        <div class="row g-4">
-            <!-- Imagem -->
-            <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8LDza2lilsBRrgM5ZobqWtKjQor4S9aL6uZyQcrCaoTeWlhkgPvk_D7pruIF4culEydfV_moa6olcHqumxfEVKIkXMM5itPKBVVpg5bfujAOWfdS--J8DutskOt6tdm5bOKEDwPqZ0KbVORdK31PS8z1o26ddIkgXNGkopWz4W2L6xLcBME1MxIs9zaqXsCL6yaGPrR4CiD-IgP22caMlCikPOKm7urq0Z3O4EG3v_5LqolUUsF_AB7g3czZNZizUznX5YbCOdn6q"
-                    alt="A smiling female student holding a red book and wearing headphones around her neck"
-                    class="rounded img-cover">
+    <!-- Modal -->
+<div class="modal fade" id="modalCategoria" tabindex="-1" aria-labelledby="modalCategoriaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCategoriaLabel">Cadastrar Categoria</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome da Categoria</label>
+                <input type="text" name="nome" id="nome" class="form-control" required>
             </div>
-            <!-- Formulário -->
-            <div class="col-md-6">
-                <h2 class="text-center mb-4 fw-bold">Registrar Categoria</h2>
-                <form action="{{ route('categorias.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" name="nome" id="nome"
-                                placeholder="Digite o nome da categoria">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-dark w-100">Registrar Categoria</button>
-                </form>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </form>
+      </div>
     </div>
+  </div>
+</div>
 @endsection
