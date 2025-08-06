@@ -52,11 +52,11 @@ Route::prefix('cursos')->name('cursos.')->group(function () {
 // Gestão de Categorias
 Route::prefix('categorias')->name('categorias.')->group(function () {
     Route::get('/', [CategoriaController::class, 'index'])->name('index');
-    Route::get('/create', [CategoriaController::class, 'create'])->name('create');
-    Route::post('/store', [CategoriaController::class, 'store'])->name('store');
-    Route::get('/{categoria}/edit', [CategoriaController::class, 'edit'])->name('edit');
-    Route::put('/{categoria}/update', [CategoriaController::class, 'update'])->name('update');
-    Route::delete('/{categoria}/destroy', [CategoriaController::class, 'destroy'])->name('destroy');
+    // Route::get('/create', [CategoriaController::class, 'create'])->name('create');
+    // Route::post('/store', [CategoriaController::class, 'store'])->name('store');
+    // Route::get('/{categoria}/edit', [CategoriaController::class, 'edit'])->name('edit');
+    // Route::put('/{categoria}/update', [CategoriaController::class, 'update'])->name('update');
+    // Route::delete('/{categoria}/destroy', [CategoriaController::class, 'destroy'])->name('destroy');
 });
 
 //Gestão de subcategorias
@@ -122,6 +122,27 @@ Route::group(['middleware' => 'Admin'], function(){
         Route::delete('/{usuarios}', [UsuarioController::class, 'destroy'])->name('destroy');
     });
 
+    //Categorias
+    Route::prefix('categorias')->name('categorias.')->group(function() {
+        Route::get('/', [CategoriaController::class, 'index'])->name('index');
+        Route::get('/create', [CategoriaController::class, 'create'])->name('create');
+        Route::post('/store', [CategoriaController::class, 'store'])->name('store');
+        Route::get('/{categoria}/edit', [CategoriaController::class, 'edit'])->name('edit');
+        Route::put('/{categoria}', [CategoriaController::class, 'update'])->name('update');
+        Route::get('/categorias', [CategoriaController::class, 'categorias'])->name('categorias');
+        Route::delete('/{categoria}/destroy', [CategoriaController::class, 'destroy'])->name('destroy');
+    });
+
+    //Subcategorias
+    Route::prefix('subcategorias')->name('subcategorias.')->group(function() {
+        Route::get('/', [SubcategoriaController::class, 'index'])->name('index');
+        Route::get('/create', [SubcategoriaController::class, 'create'])->name('create');
+        Route::post('/store', [SubcategoriaController::class, 'store'])->name('store');
+        Route::get('/{subcategoria}/edit', [SubcategoriaController::class, 'edit'])->name('edit');
+        Route::put('/{subcategoria}', [SubcategoriaController::class, 'update'])->name('update');
+        Route::get('/subcategorias', [SubcategoriaController::class, 'subcategorias'])->name('subcategorias');
+        Route::delete('/{subcategoria}', [SubcategoriaController::class, 'destroy'])->name('destroy');
+    });
 });
 
 Route::group(['middleware' => 'User'], function(){

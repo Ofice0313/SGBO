@@ -1,17 +1,31 @@
-@extends('templates/registro_de_material_layout')
+@extends('templates/categorias_layout')
 @section('content')
-<div class="container">
-    <h2>Editar Categoria</h2>
+    <div class="bg-light p-5 rounded shadow-lg container max-w-4xl">
+        <div class="row g-4">
+            <!-- Imagem -->
+            <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8LDza2lilsBRrgM5ZobqWtKjQor4S9aL6uZyQcrCaoTeWlhkgPvk_D7pruIF4culEydfV_moa6olcHqumxfEVKIkXMM5itPKBVVpg5bfujAOWfdS--J8DutskOt6tdm5bOKEDwPqZ0KbVORdK31PS8z1o26ddIkgXNGkopWz4W2L6xLcBME1MxIs9zaqXsCL6yaGPrR4CiD-IgP22caMlCikPOKm7urq0Z3O4EG3v_5LqolUUsF_AB7g3czZNZizUznX5YbCOdn6q"
+                    alt="A smiling female student holding a red book and wearing headphones around her neck"
+                    class="rounded img-cover">
+            </div>
+            <!-- Formulário -->
+            <div class="col-md-6">
+                <h2 class="text-center mb-4 fw-bold">Editar Categoria</h2>
+                <form method="POST" action="{{ route('categorias.update', $categoria->id) }}" >
+                    @csrf
+                    @method('PUT')
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" name="nome"
+                                value="{{ $categoria->nome }}" placeholder="Digite o nome do curso">
+                        </div>
+                    </div>
 
-    <form action="{{ route('admin.categorias.update', $categoria->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome da Categoria</label>
-            <input type="text" class="form-control" name="nome" value="{{ old('nome', $categoria->nome) }}" required>
+                    <button type="submit" class="btn btn-dark w-100">Salvar Alterações</button>
+                </form>
+            </div>
         </div>
-        <button type="submit" class="btn btn-success">Actualizar</button>
-        <a href="{{ route('admin.categorias.index') }}" class="btn btn-secondary">Voltar</a>
-    </form>
-</div>
+    </div>
 @endsection
+

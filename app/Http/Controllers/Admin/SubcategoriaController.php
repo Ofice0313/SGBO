@@ -9,6 +9,20 @@ use Illuminate\Http\Request;
 
 class SubcategoriaController extends Controller
 {
+    public function subcategorias(Request $request)
+    {
+        $query = $request->input('q');
+        $subcategorias = Subcategoria::with('subcategoria');
+        if ($query) {
+            $subcategorias = $subcategorias->where('nome', 'like', "%$query%");
+        }
+        $subcategorias = $subcategorias->get();
+        $data = [
+            'title' => 'subcategorias',
+        ];
+        return view('admin.subcategorias.index', array_merge($data, compact('subcategorias')));
+    }
+
     public function index()
     {
         $subcategorias = Subcategoria::with('categoria')->get();
@@ -29,7 +43,7 @@ class SubcategoriaController extends Controller
         ]);
 
         Subcategoria::create($request->all());
-        return redirect()->route('admin.subcategorias.index')->with('success', 'Subcategoria criada com sucesso.');
+        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria criada com sucesso.');
     }
 
     public function edit(Subcategoria $subcategoria)
@@ -46,13 +60,13 @@ class SubcategoriaController extends Controller
         ]);
 
         $subcategoria->update($request->all());
-        return redirect()->route('admin.subcategorias.index')->with('success', 'Subcategoria actualizada com sucesso.');
+        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria actualizada com sucesso.');
     }
 
     public function destroy(Subcategoria $subcategoria)
     {
         $subcategoria->delete();
-        return redirect()->route('admin.subcategorias.index')->with('success', 'Subcategoria eliminada com sucesso.');
+        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria eliminada com sucesso.');
     }
 }
 
