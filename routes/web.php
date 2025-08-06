@@ -111,6 +111,17 @@ Route::group(['middleware' => 'Admin'], function(){
         Route::delete('/{curso}', [CursoController::class, 'destroy'])->name('destroy');
     });
 
+    //Usuarios
+    Route::prefix('usuarios')->name('usuarios.')->group(function() {
+        Route::get('/', [UsuarioController::class, 'index'])->name('index');
+        Route::get('/create', [UsuarioController::class, 'create'])->name('create');
+        Route::post('/store', [UsuarioController::class, 'store'])->name('store');
+        Route::get('/{usuario}/edit', [UsuarioController::class, 'edit'])->name('edit');
+        Route::put('/{usuario}', [UsuarioController::class, 'update'])->name('update');
+        Route::get('/usuarios', [UsuarioController::class, 'usuarios'])->name('usuarios');
+        Route::delete('/{usuarios}', [UsuarioController::class, 'destroy'])->name('destroy');
+    });
+
 });
 
 Route::group(['middleware' => 'User'], function(){

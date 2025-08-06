@@ -2,8 +2,8 @@
 @section('content')
 <h1 class="h3 fw-bold mb-4">Gerenciamento de Usuários</h1>
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <form class="d-flex" style="max-width: 400px;" method="GET" action="">
-        <input class="form-control me-2" type="search" name="q" value=""
+    <form class="d-flex" style="max-width: 400px;" method="GET" action="{{ route('usuarios.usuarios') }}">
+        <input class="form-control me-2" type="search" name="q" value="{{ request('q') }}"
             placeholder="Pesquisar usuário..." aria-label="Pesquisar">
         <button class="btn btn-outline-secondary" type="submit">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -13,7 +13,7 @@
             </svg>
         </button>
     </form>
-    <a href="" class="btn btn-primary">
+    <a href="{{ route('usuarios.create') }}" class="btn btn-primary">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             class="bi bi-person-plus" viewBox="0 0 16 16">
             <path
@@ -43,7 +43,7 @@
                     <td>{{ $usuario->status ? 'Ativo' : 'Inativo' }}</td>
                     <td>{{ $usuario->emprestimos_count ?? 0 }}</td>
                     <td class="d-flex align-items-center gap-2">
-                        <form action="{{ route('admin.usuarios.destroy', $usuario->id) }}" method="POST"
+                        <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST"
                             style="display:inline;"
                             onsubmit="return confirm('Tem certeza que deseja excluir este usuário?')">
                             @csrf
@@ -60,7 +60,7 @@
                             </button>
                         </form>
 
-                        <a href="{{ route('admin.usuarios.edit', $usuario->id) }}" class="text-decoration-none text-dark">
+                        <a href="{{ route('usuarios.edit', $usuario->id) }}" class="text-decoration-none text-dark">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path

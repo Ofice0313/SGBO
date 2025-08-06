@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Curso;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -65,22 +66,23 @@ class UsuarioController extends Controller
         }
         $usuario->fill($data);
         $usuario->save();
-        return redirect()->route('admin.usuarios.index')->with('success', 'Usuário atualizado com sucesso!');
+        return redirect()->route('usuarios.index')->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy($id)
     {
         $usuario = User::findOrFail($id);
         $usuario->delete();
-        return redirect()->route('admin.usuarios.index')->with('success', 'Usuário excluído com sucesso!');
+        return redirect()->route('usuarios.index')->with('success', 'Usuário excluído com sucesso!');
     }
 
     public function create()
     {
+        $cursos = Curso::all();
         $data = [
             'title' => 'registrar-me'
         ];
-        return view('admin.usuarios.cadastrar_usuario', $data);
+        return view('admin.usuarios.cadastrar_usuario', compact('data', 'cursos'));
     }
 
     public function store(Request $request)
@@ -89,7 +91,7 @@ class UsuarioController extends Controller
             'nome' => 'required|string|max:255',
             'telefone' => 'nullable|string|max:50',
             'endereco' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:usuarios,email',
+            'email' => 'required|email|unique:users,email',
             'instituicao' => 'required|in:LORE,ISLORE,FOCO',
             'curso_id' => 'required|exists:cursos,id',
             'password' => 'required|confirmed|min:6',
@@ -112,6 +114,6 @@ class UsuarioController extends Controller
         $user->status = true; // exemplo: define ativo
         $user->save();
 
-        return redirect()->route('admin.usuarios.index')->with('success', 'Conta criada com sucesso! Faça login.');
+        return redirect()->route('usuarios.index')->with('success', 'Conta criada com sucesso! Faça login.');
     }
 }

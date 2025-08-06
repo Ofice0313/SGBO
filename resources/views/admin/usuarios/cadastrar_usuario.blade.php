@@ -11,7 +11,8 @@
             <!-- Formulário -->
             <div class="col-md-6">
                 <h2 class="text-center mb-4 fw-bold">Registrar de Usuário</h2>
-                <form action="{{ route('admin.usuarios.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('usuarios.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome</label>
@@ -38,28 +39,28 @@
                                     <option value="ISLORE">IsLore</option>
                                     <option value="FOCO">FOCO</option>
                                 </select>
-                                <span class="material-icons">arrow_drop_down</span>
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="endereco" class="form-label">Endereço</label>
-                        <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Endereço">
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="curso" class="form-label">Curso</label>
-                        <select name="curso_id" required>
-                            <option value="">-- Selecione o Curso --</option>
-                            <option value="Programação">Programação</option>
-                            <option value="Redes">Redes</option>
-                            <option value="Enfermagem Geral">Enfermagem Geral</option>
-                            <option value="Mecânica">Mecânica</option>
-                            <option value="Electricidade">Electricidade</option>
-                            @foreach ($cursos as $curso)
-                                <option value="{{ $curso->id }}">{{ $curso->nome }}</option>
-                            @endforeach
-                        </select>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="endereco" class="form-label">Endereço</label>
+                            <input type="text" class="form-control" name="endereco" id="endereco"
+                                placeholder="Endereço">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="curso_id" class="form-label">Curso</label>
+                            <div class="select-wrapper">
+                                <select name="curso_id" class="form-select" required>
+                                    <option value="">-- Selecione o Curso --</option>
+                                    @foreach ($cursos as $curso)
+                                        <option value="{{ $curso->id }}">{{ $curso->nome }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row g-3 mb-4">
@@ -78,8 +79,7 @@
                     <button type="submit" class="btn btn-dark w-100">Registrar-me</button>
 
                     <p class="text-center mt-3 small">
-                        Já tem uma conta? <a href="#"
-                            class="text-decoration-none text-primary fw-medium">Entrar</a>
+                        Já tem uma conta? <a href="#" class="text-decoration-none text-primary fw-medium">Entrar</a>
                     </p>
                 </form>
             </div>

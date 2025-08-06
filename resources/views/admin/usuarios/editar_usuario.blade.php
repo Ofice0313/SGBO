@@ -11,7 +11,7 @@
             <!-- Formulário -->
             <div class="col-md-6">
                 <h2 class="text-center mb-4 fw-bold">Editar Usuário</h2>
-                <form method="POST" action="{{ route('admin.usuarios.update', $usuario->id) }}" >
+                <form method="POST" action="{{ route('usuarios.update', $usuario->id) }}" >
                     @csrf
                     @method('PUT')
                     <div class="row g-3 mb-3">
@@ -37,14 +37,16 @@
                             <div class="select-wrapper">
                                 <select id="instituicao" name="instituicao" class="form-select">
                                     <option value="">Selecione</option>
-                                    <option value="Universidade A"
-                                        {{ $usuario->instituicao == 'Universidade A' ? 'selected' : '' }}>Universidade A
+                                    <option value="LORE"
+                                        {{ $usuario->instituicao == 'LORE' ? 'selected' : '' }}>Lore
                                     </option>
-                                    <option value="Universidade B"
-                                        {{ $usuario->instituicao == 'Universidade B' ? 'selected' : '' }}>Universidade B
+                                    <option value="ISLORE"
+                                        {{ $usuario->instituicao == 'ISLORE' ? 'selected' : '' }}>IsLore
+                                    </option>
+                                    <option value="FOCO"
+                                        {{ $usuario->instituicao == 'FOCO' ? 'selected' : '' }}>FOCO
                                     </option>
                                 </select>
-                                <span class="material-icons">arrow_drop_down</span>
                             </div>
                         </div>
                     </div>
