@@ -17,6 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('material_id')->nullable();
             $table->date('data_de_retirada');
             $table->date('data_de_devolucao')->nullable();
+            $table->date('data_limite');
+            $table->string('nota_antes_do_emprestimo');
+            $table->string('nota_apos_emprestimo');
+            $table->integer('unidades');
             $table->decimal('multa', 8, 2)->default(0);
             $table->string('notificacao')->default(false);
             $table->enum('status_emprestimo', ['PENDENTE', 'EMPRESTADO', 'DEVOLVIDO', 'REJEITADO'])->default('PENDENTE');
