@@ -7,6 +7,7 @@ enum StatusEmprestimo:string
     case Pendente = 'PENDENTE';
     case Emprestado = 'EMPRESTADO';
     case Devolvido = 'DEVOLVIDO';
+    case Validar = 'VALIDAR';
 }
 
 

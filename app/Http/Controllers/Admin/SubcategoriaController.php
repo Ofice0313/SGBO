@@ -26,47 +26,55 @@ class SubcategoriaController extends Controller
     public function index()
     {
         $subcategorias = Subcategoria::with('categoria')->get();
-        return view('admin.subcategorias.index', compact('subcategorias'));
+        $categorias = Categoria::all(); // Se precisar para o select do modal
+
+        return view('admin.subcategorias.index', compact('subcategorias', 'categorias'));
     }
 
-    public function create()
+    public function edit($id)
     {
-        $categorias = Categoria::all();
-        return view('admin.subcategorias.create', compact('categorias'));
+        $categoria = Categoria::with('categoria')->findOrFail($id);
+        $data = [
+            'title' => 'editar_categoria',
+            'usuario' => $categoria,
+        ];
+        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria actualizada com sucesso!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $subcategoria = Categoria::findOrFail($id);
+        $data = $request->validate([
+            'nome' => 'required|string',
+            'categoria' => 'nullable|string',
+        ]);
+        $subcategoria->fill($data);
+        $subcategoria->save();
+        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria atualizada com sucesso!');
+    }
+
+    public function destroy($id)
+    {
+        $subcategoria = Categoria::findOrFail($id);
+        $subcategoria->delete();
+        return redirect()->route('subcategorias.index')->with('success', 'Sucategoria excluído com sucesso!');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required',
+            'nome' => 'required|string|max:255',
             'categoria_id' => 'required|exists:categorias,id',
+        ], [
+            'categoria_id.required' => 'Selecione uma categoria.',
+            'categoria_id.exists' => 'A categoria selecionada não existe.',
         ]);
 
-        Subcategoria::create($request->all());
-        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria criada com sucesso.');
-    }
+        $subcategorias = new Categoria();
+        $subcategorias->nome = $request->nome;
+        $subcategorias->categoria_id = $request->categoria_id;
+        $subcategorias->save();
 
-    public function edit(Subcategoria $subcategoria)
-    {
-        $categorias = Categoria::all();
-        return view('admin.subcategorias.edit', compact('subcategoria', 'categorias'));
-    }
-
-    public function update(Request $request, Subcategoria $subcategoria)
-    {
-        $request->validate([
-            'nome' => 'required',
-            'categoria_id' => 'required|exists:categorias,id',
-        ]);
-
-        $subcategoria->update($request->all());
-        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria actualizada com sucesso.');
-    }
-
-    public function destroy(Subcategoria $subcategoria)
-    {
-        $subcategoria->delete();
-        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria eliminada com sucesso.');
+        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria criada com sucesso!.');
     }
 }
-

@@ -9,7 +9,9 @@ class Subcategoria extends Model
 {
 
     use HasFactory;
-    protected $fillable = ['nome' ];
+
+    protected $table = 'subcategorias'; // Estava errado como array
+    protected $fillable = ['nome', 'categoria_id'];
 
     public function materiais()
     {
