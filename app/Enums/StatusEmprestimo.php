@@ -8,6 +8,8 @@ enum StatusEmprestimo:string
     case Emprestado = 'EMPRESTADO';
     case Devolvido = 'DEVOLVIDO';
     case Validar = 'VALIDAR';
+    case Rejeitado = 'REJEITADO';
+    case Validado = 'VALIDADO';
 }
 
 
