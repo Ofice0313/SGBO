@@ -10,6 +10,7 @@ enum StatusEmprestimo:string
     case Validar = 'VALIDAR';
     case Rejeitado = 'REJEITADO';
     case Validado = 'VALIDADO';
+    case Devolver = 'DEVOLVER';
 }
 
 

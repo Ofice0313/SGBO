@@ -151,7 +151,7 @@ Route::group(['middleware' => 'User'], function(){
     Route::prefix('emprestimos')->name('emprestimos.')->group(function() {
         Route::get('/solicitar', [EmprestimoController::class, 'criar'])->name('criar');
         Route::post('/solicitar', [EmprestimoController::class, 'solicitar'])->name('solicitar');
-        Route::put('/emprestimos/{id}/devolver', [EmprestimoController::class, 'solicitarDevolucao'])->name('devolver');
+        Route::put('/{id}/devolver', [EmprestimoController::class, 'solicitarDevolucao'])->name('devolver');
         Route::get('/meus-emprestimos', [EmprestimoController::class, 'meus_emprestimos'])->name('meus_emprestimos');
     });
     

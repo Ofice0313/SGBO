@@ -10,7 +10,9 @@
                     <th>Titulo do Material</th>
                     <th>Data de Retirada</th>
                     <th>Data de Devolução</th>
-                    <th></th>
+                    <th>Status do Empréstimo</th>
+                    <th>Validar</th>
+                    <th>Confirmar Devolução</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,7 +22,8 @@
                         <td>{{ $emp->material->titulo }}</td>
                         <td>{{ $emp->data_de_retirada }}</td>
                         <td>{{ $emp->data_de_devolucao }}</td>
-                        <td>
+                        <td>{{ $emp->status_emprestimo }}</td>
+                        {{-- <td>
                             <form action="{{ route('adminemprestimos.validar', $emp->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
@@ -28,6 +31,37 @@
                                 <button class="btn btn-success btn-sm mt-1">Validar</button>
                             </form>
                         </td>
+                        <td>
+                            <form action="{{ route('adminemprestimos.confirmarDevolucao', $emp->id) }}" method="POST">
+                                @csrf
+                                <textarea name="nota_apos_emprestimo" class="form-control" placeholder="Estado do material apos o empréstimo"></textarea>
+                                <button class="btn btn-success btn-sm mt-1">Confirmar</button>
+                            </form>
+                        </td> --}}
+
+                        <td>
+                            @if ($emp->status_emprestimo == 'PENDENTE')
+                                {{-- Campo visível apenas se ainda não validou --}}
+                                <form action="{{ route('adminemprestimos.validar', $emp->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <textarea name="nota_antes_do_emprestimo" class="form-control" placeholder="Estado do material"></textarea>
+                                    <button class="btn btn-success btn-sm mt-1">Validar</button>
+                                </form>
+                            @endif
+                        </td>
+
+                        <td>
+                            @if ($emp->status_emprestimo == 'DEVOLVER')
+                                {{-- Campo visível apenas se o usuário solicitou devolução --}}
+                                <form action="{{ route('adminemprestimos.confirmarDevolucao', $emp->id) }}" method="POST">
+                                    @csrf
+                                    <textarea name="nota_apos_emprestimo" class="form-control" placeholder="Estado do material após o empréstimo"></textarea>
+                                    <button class="btn btn-success btn-sm mt-1">Confirmar</button>
+                                </form>
+                            @endif
+                        </td>
+
                     </tr>
                 @endforeach
             </tbody>

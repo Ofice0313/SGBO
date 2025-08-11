@@ -13,6 +13,7 @@
                     <th>Status do Empréstimo</th>
                     <th>Multa</th>
                     <th>Unidade</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
