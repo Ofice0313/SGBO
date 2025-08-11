@@ -26,7 +26,8 @@
                 </div>
 
                 <div class="mt-2">
-                    <h6 class="mb-0 text-dark fw-semibold">O Jardim Secreto</h6>
+                    <h6 class="mb-0 text-dark fw-semibold">{{ $material->titulo }}</h6>
+                    <h6 class="mb-0 text-dark fw-semibold">{{ $material->status_material }}</h6>
                     <small class="text-muted">Frances Hodgson Burnett</small><br>
                     <a href="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

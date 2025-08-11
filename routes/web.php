@@ -143,10 +143,21 @@ Route::group(['middleware' => 'Admin'], function(){
         Route::get('/subcategorias', [SubcategoriaController::class, 'subcategorias'])->name('subcategorias');
         Route::delete('/{subcategoria}', [SubcategoriaController::class, 'destroy'])->name('destroy');
     });
+
+    Route::prefix('adminemprestimos')->name('adminemprestimos.')->group(function() {
+        Route::put('emprestimos/{id}/validar', [EmprestimoController::class, 'validar'])->name('validar');
+        Route::get('/emprestimos', [EmprestimoController::class, 'emprestimos'])->name('emprestimos');
+        Route::post('emprestimos/{id}/confirmar-devolucao', [EmprestimoController::class, 'confirmarDevolucao'])->name('confirmarDevolucao');
+    });
 });
 
 Route::group(['middleware' => 'User'], function(){
     Route::get('user/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/emprestimos/solicitar', [EmprestimoController::class, 'criar'])->name('emprestimos.criar');
-    Route::post('/emprestimos/solicitar', [EmprestimoController::class, 'solicitar'])->name('emprestimos.solicitar');
+    Route::prefix('emprestimos')->name('emprestimos.')->group(function() {
+        Route::get('/solicitar', [EmprestimoController::class, 'criar'])->name('criar');
+        Route::post('/solicitar', [EmprestimoController::class, 'solicitar'])->name('solicitar');
+        Route::post('/emprestimos/{id}/devolver', [EmprestimoController::class, 'solicitarDevolucao'])->name('devolver');
+        Route::get('/meus-emprestimos', [EmprestimoController::class, 'meus_emprestimos'])->name('meus_emprestimos');
+    });
+    
 });

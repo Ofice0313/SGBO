@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('ano_de_publicacao')->nullable();
             $table->string('caminho_do_arquivo')->nullable();
             $table->string('caminho_do_audio')->nullable();
-            $table->string('caminho_da_imagem')->nullable();
+            $table->string('caminho_da_imagem', 1000)->nullable();
             $table->integer('paginas');
             $table->integer('minutos')->nullable();
             $table->enum('tipo', ['LIVRO', 'AUDIOLIVRO', 'ARTIGO', 'REVISTA'])

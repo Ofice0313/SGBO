@@ -19,12 +19,23 @@
                     <form action="{{ route('emprestimos.solicitar') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
-                            <select name="material_id" id="material_id" class="form-control">
-                                <option value="">-- Selecione um Material --</option>
-                                @foreach ($materiais as $material)
-                                    <option value="{{ $material->id }}">{{ $material->titulo }}</option>
-                                @endforeach
-                            </select>
+
+                            <div class="col-12 d-flex flex-column flex-md-row align-items-start gap-3">
+                                <div class="col-md-6">
+                                    <label for="">Selecione o Material</label>
+                                    <select name="material_id" id="material_id" class="form-control">
+                                        <option value="">-- Selecione um Material --</option>
+                                        @foreach ($materiais as $material)
+                                            <option value="{{ $material->id }}">{{ $material->titulo }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="">Quantidade:</label>
+                                    <input type="number" name="unidades" min="0" class="form-control" required>
+                                </div>
+                            </div>
 
                             <div id="disponibilidade_msg" class="mt-2 text-sm fw-bold"></div>
 
