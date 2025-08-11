@@ -226,7 +226,7 @@ class EmprestimoController extends Controller
                 throw new \Exception('Não é possível devolver um empréstimo que não foi validado.');
             }
 
-            $emprestimo->update(['status_emprestimo' => 'DEVOLVER']);
+            $emprestimo->update(['status_emprestimo' => 'DEVOLVIDO']);
         });
 
         return back()->with('success', 'Solicitação de devolução enviada ao administrador.');

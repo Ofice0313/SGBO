@@ -23,7 +23,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('usuarios.index')}}">
+                data-url="{{ route('usuarios.index') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-people" viewBox="0 0 16 16">
                     <path
@@ -43,7 +43,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('categorias.index')}}">
+                data-url="{{ route('categorias.index') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-tag" viewBox="0 0 16 16">
                     <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0" />
@@ -54,7 +54,7 @@
             </a>
 
             <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
-                data-url="{{ route('subcategorias.index')}}">
+                data-url="{{ route('subcategorias.index') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor"
                     class="bi bi-tag" viewBox="0 0 16 16">
                     <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0" />
@@ -107,7 +107,7 @@
                 Cursos
             </a>
 
-            <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
+            {{-- <a href="{{ url('logout') }}" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
                 class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                     class="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -116,7 +116,22 @@
                     <path fill-rule="evenodd"
                         d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
                 </svg>Sair
+            </a> --}}
+
+            <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display:none;">
+                @csrf
+            </form>
+
+            <a href="#" class="list-group-item list-group-item-action nav-link d-flex align-items-center gap-2"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                    class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0..." />
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0..." />
+                </svg>
+                Sair
             </a>
+
         </div>
     </div>
 </div>

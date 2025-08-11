@@ -82,11 +82,6 @@ Route::prefix('subcategorias')->name('subcategorias.')->group(function () {
 // Route::get('/materiais/{id}/disponibilidade', [EmprestimoController::class, 'verificarDisponibilidade'])->name('materiais.verificarDisponibilidade');
 
 
-
-Route::get('forgot', [AuthController::class, 'forgot']);
-
-Route::get('logout', [AuthController::class, 'logout']);
-
 Route::group(['middleware' => 'Admin'], function(){
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
 
@@ -147,7 +142,7 @@ Route::group(['middleware' => 'Admin'], function(){
     Route::prefix('adminemprestimos')->name('adminemprestimos.')->group(function() {
         Route::put('emprestimos/{id}/validar', [EmprestimoController::class, 'validar'])->name('validar');
         Route::get('/emprestimos', [EmprestimoController::class, 'emprestimos'])->name('emprestimos');
-        Route::post('emprestimos/{id}/confirmar-devolucao', [EmprestimoController::class, 'confirmarDevolucao'])->name('confirmarDevolucao');
+        Route::post('/emprestimos/{id}/confirmar-devolucao', [EmprestimoController::class, 'confirmarDevolucao'])->name('confirmarDevolucao');
     });
 });
 
@@ -156,8 +151,11 @@ Route::group(['middleware' => 'User'], function(){
     Route::prefix('emprestimos')->name('emprestimos.')->group(function() {
         Route::get('/solicitar', [EmprestimoController::class, 'criar'])->name('criar');
         Route::post('/solicitar', [EmprestimoController::class, 'solicitar'])->name('solicitar');
-        Route::post('/emprestimos/{id}/devolver', [EmprestimoController::class, 'solicitarDevolucao'])->name('devolver');
+        Route::put('/emprestimos/{id}/devolver', [EmprestimoController::class, 'solicitarDevolucao'])->name('devolver');
         Route::get('/meus-emprestimos', [EmprestimoController::class, 'meus_emprestimos'])->name('meus_emprestimos');
     });
     
 });
+
+Route::get('forgot', [AuthController::class, 'forgot']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');

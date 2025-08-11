@@ -23,11 +23,11 @@ class AdminMiddleware
             }else
             {
                 Auth::logout();
-                return redirect(url('login'));
+                return redirect(url('/login'));
             }
         }else{
             Auth::logout();
-            return redirect(url('login'));
+            return redirect(url('/login'));
         }
     }
 }
