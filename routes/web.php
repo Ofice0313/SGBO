@@ -86,13 +86,15 @@ Route::group(['middleware' => 'Admin'], function(){
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
 
     //Materias 
-    Route::get('/materiais', [MaterialController::class, 'index'])->name('materiais.index');
-    Route::get('/create', [MaterialController::class, 'create'])->name('materiais.create');
-    Route::get('/tela_de_livros', [MaterialController::class, 'tela_de_livros'])->name('tela_de_livros');
-    Route::post('/store', [MaterialController::class, 'store'])->name('store');
-    Route::get('/{material}/edit', [MaterialController::class, 'edit'])->name('materiais.edit');
-    Route::put('/{material}/update', [MaterialController::class, 'update'])->name('materiais.update');
-    Route::delete('/{material}/destroy', [MaterialController::class, 'destroy'])->name('materiais.destroy');
+    Route::prefix('materiais')->name('materiais.')->group(function () {
+        Route::get('/materiais', [MaterialController::class, 'index'])->name('index');
+        Route::get('/create', [MaterialController::class, 'create'])->name('create');
+        Route::get('/tela_de_livros', [MaterialController::class, 'tela_de_livros'])->name('tela_de_livros');
+        Route::post('/store', [MaterialController::class, 'store'])->name('store');
+        Route::get('/{material}/edit', [MaterialController::class, 'edit'])->name('edit');
+        Route::put('/{material}/update', [MaterialController::class, 'update'])->name('update');
+        Route::delete('/{material}/destroy', [MaterialController::class, 'destroy'])->name('destroy');
+    });
 
     //Cursos
 
@@ -143,6 +145,9 @@ Route::group(['middleware' => 'Admin'], function(){
         Route::put('emprestimos/{id}/validar', [EmprestimoController::class, 'validar'])->name('validar');
         Route::get('/emprestimos', [EmprestimoController::class, 'emprestimos'])->name('emprestimos');
         Route::post('/emprestimos/{id}/confirmar-devolucao', [EmprestimoController::class, 'confirmarDevolucao'])->name('confirmarDevolucao');
+        Route::put('{id}/entregar', [EmprestimoController::class, 'entregar'])->name('entregar');
+        Route::put('/{id}/aceitarPedidoDeDevolucao', [EmprestimoController::class, 'aceitarPedidoDeDevolucao'])->name('aceitarPedidoDeDevolucao');
+        Route::put('/{id}/confirmarDevolucao', [EmprestimoController::class, 'confirmarDevolucao'])->name('confirmarDevolucao');
     });
 });
 
@@ -151,7 +156,10 @@ Route::group(['middleware' => 'User'], function(){
     Route::prefix('emprestimos')->name('emprestimos.')->group(function() {
         Route::get('/solicitar', [EmprestimoController::class, 'criar'])->name('criar');
         Route::post('/solicitar', [EmprestimoController::class, 'solicitar'])->name('solicitar');
-        Route::put('/{id}/devolver', [EmprestimoController::class, 'solicitarDevolucao'])->name('devolver');
+        Route::put('/{id}/confirmarLevantamento', [EmprestimoController::class, 'confirmarLevantamento'])->name('confirmarLevantamento');
+        Route::put('/{id}/Levantar', [EmprestimoController::class, 'Levantar'])->name('Levantar');
+        Route::put('/{id}/solicitarDevolucao', [EmprestimoController::class, 'solicitarDevolucao'])->name('solicitarDevolucao');
+        Route::put('/{id}/devolver', [EmprestimoController::class, 'devolver'])->name('devolver');
         Route::get('/meus-emprestimos', [EmprestimoController::class, 'meus_emprestimos'])->name('meus_emprestimos');
     });
     
@@ -159,3 +167,5 @@ Route::group(['middleware' => 'User'], function(){
 
 Route::get('forgot', [AuthController::class, 'forgot']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/tela_de_livros', [MaterialController::class, 'tela_de_livros'])->name('tela_de_livros');

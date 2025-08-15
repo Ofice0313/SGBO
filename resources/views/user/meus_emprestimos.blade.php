@@ -14,6 +14,7 @@
                     <th>Multa</th>
                     <th>Unidade</th>
                     <th>Ações</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,30 @@
                         <td>{{ $emp->unidades }}</td>
                         <td>
                             @if ($emp->status_emprestimo == 'VALIDADO')
+                                <form action="{{ route('emprestimos.Levantar', $emp->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <button class="btn btn-warning btn-sm">Levantar</button>
+                                </form>
+                            @elseif($emp->status_emprestimo == 'AGUARDANDO_CONFIRMACAO_DE_ENTREGA')
+                                <form action="{{ route('emprestimos.confirmarLevantamento', $emp->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <button class="btn btn-warning btn-sm">
+                                        Confirmar Levantamento
+                                    </button>
+                                </form>
+                            @endif
+
+                        </td>
+                        <td>
+                            @if($emp->status_emprestimo == 'EMPRESTADO')
+                                <form action="{{ route('emprestimos.solicitarDevolucao', $emp->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <button class="btn btn-warning btn-sm">Solicitar Devolucao</button>
+                                </form>
+                            @elseif($emp->status_emprestimo == 'AGUARDANDO_DEVOLUCAO')
                                 <form action="{{ route('emprestimos.devolver', $emp->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')

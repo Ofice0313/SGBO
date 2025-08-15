@@ -18,22 +18,14 @@ class EmprestimoController extends Controller
     //     return view('admin.emprestimos.index', compact('emprestimos'));
     // }
 
-    public function meus_emprestimos(){
-        $meus_emprestimos = Emprestimo::with(['user', 'material'])->get();
+    public function meus_emprestimos()
+    {
+        $meus_emprestimos = Emprestimo::with(['user', 'material'])->where('user_id', Auth::id())->get();
         return view('user.meus_emprestimos', compact('meus_emprestimos'));
-        // $e = Emprestimo::first();
-        // dd($e->user);
-
-         // Teste 1: Verifique os nomes reais no banco
-        // $user = User::first();
-        // dd($user->toArray()); // Veja os nomes reais dos campos
-        
-        // // Teste 2: Verifique o relacionamento
-        // $emprestimo = Emprestimo::with('user')->first();
-        // dd($emprestimo->toArray());
     }
 
-    public function emprestimos(){
+    public function emprestimos()
+    {
         $emprestimo = Emprestimo::with(['user', 'material'])->get();
         return view('admin.emprestimos.emprestimos_pendentes', compact('emprestimo'));
     }
@@ -199,7 +191,7 @@ class EmprestimoController extends Controller
 
         DB::transaction(function () use ($request, $id) {
             $emprestimo = Emprestimo::findOrFail($id);
-            
+
             if ($emprestimo->status_emprestimo !== 'PENDENTE') {
                 throw new \Exception('Empréstimo não está pendente para validação.');
             }
@@ -222,15 +214,48 @@ class EmprestimoController extends Controller
         DB::transaction(function () use ($id) {
             $emprestimo = Emprestimo::where('user_id', Auth::id())->findOrFail($id);
 
-            if ($emprestimo->status_emprestimo !== 'VALIDADO') {
-                throw new \Exception('Não é possível devolver um empréstimo que não foi validado.');
+            if ($emprestimo->status_emprestimo !== 'EMPRESTADO') {
+                throw new \Exception('Não é possível devolver um empréstimo que não foi emprestado.');
             }
 
-            $emprestimo->update(['status_emprestimo' => 'DEVOLVIDO']);
+            $emprestimo->update(['status_emprestimo' => 'PEDIDO_DE_SOLICITACAO_DE_DEVOLUCAO']);
         });
 
         return back()->with('success', 'Solicitação de devolução enviada ao administrador.');
     }
+
+    public function aceitarPedidoDeDevolucao($id)
+    {
+        DB::transaction(function () use ($id) {
+            $emprestimo = Emprestimo::findOrFail($id);
+            // where('user_id', Auth::id())->
+            if ($emprestimo->status_emprestimo !== 'PEDIDO_DE_SOLICITACAO_DE_DEVOLUCAO') {
+                throw new \Exception('Não é possível aceitar o pedido de devolução.');
+            }
+
+            $emprestimo->update(['status_emprestimo' => 'AGUARDANDO_DEVOLUCAO']);
+        });
+
+        return back()->with('success', 'Pedido Aceite!');
+    }
+
+    public function devolver($id)
+    {
+            DB::transaction(function () use ($id) {
+            $emprestimo = Emprestimo::where('user_id', Auth::id())->findOrFail($id);
+
+            if ($emprestimo->status_emprestimo !== 'AGUARDANDO_DEVOLUCAO') {
+                throw new \Exception('Empréstimo não está aguardando devolucao.');
+            }
+
+            $emprestimo->update([
+                'status_emprestimo' => 'DEVOLVER'
+            ]);
+        });
+
+        return back()->with('success', 'Aguardando confirmação de devolução!');
+    }
+
 
     public function confirmarDevolucao(Request $request, $id)
     {
@@ -258,4 +283,57 @@ class EmprestimoController extends Controller
         return back()->with('success', 'Devolução confirmada com sucesso!');
     }
 
+    public function levantar($id)
+    {
+        DB::transaction(function () use ($id) {
+            $emprestimo = Emprestimo::findOrFail($id);
+
+            if ($emprestimo->status_emprestimo !== 'VALIDADO') {
+                throw new \Exception('Empréstimo não está validado para levantamento.');
+            }
+
+            $emprestimo->update([
+                'status_emprestimo' => 'AGUARDANDO_CONFIRMACAO_DE_LEVANTAMENTO'
+            ]);
+
+            $material = $emprestimo->material;
+            $material->update(['status_material' => 'INDISPONIVEL']);
+        });
+
+        return back()->with('success', 'Empréstimo aguardando confirmação de levantamento!');
+    }
+
+    public function entregar($id)
+    {
+        DB::transaction(function () use ($id) {
+            $emprestimo = Emprestimo::findOrFail($id);
+
+            if ($emprestimo->status_emprestimo !== 'AGUARDANDO_CONFIRMACAO_DE_LEVANTAMENTO') {
+                throw new \Exception('Empréstimo não está aguardando confirmação.');
+            }
+
+            $emprestimo->update([
+                'status_emprestimo' => 'AGUARDANDO_CONFIRMACAO_DE_ENTREGA'
+            ]);
+        });
+
+        return back()->with('success', 'Aguardando confirmação de entrega!');
+    }
+
+    public function confirmarLevantamento($id)
+    {
+        DB::transaction(function () use ($id) {
+            $emprestimo = Emprestimo::findOrFail($id);
+
+            if ($emprestimo->status_emprestimo !== 'AGUARDANDO_CONFIRMACAO_DE_ENTREGA') {
+                throw new \Exception('Só pode confirmar que estao aguardando confirmação de entrega.');
+            }
+
+            $emprestimo->update([
+                'status_emprestimo' => 'EMPRESTADO',
+            ]);
+        });
+
+        return back()->with('success', 'EMPRESTIMO realizado com sucesso!');
+    }
 }

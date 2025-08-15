@@ -1,6 +1,29 @@
 @extends('templates/registro_de_material_layout')
 @section('content')
 <h1 class="h3 fw-bold mb-4">Gerenciamento de Materiais</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <form class="d-flex" style="max-width: 400px;" method="GET" action="{{ route('usuarios.usuarios') }}">
+        <input class="form-control me-2" type="search" name="q" value="{{ request('q') }}"
+            placeholder="Pesquisar usuário..." aria-label="Pesquisar">
+        <button class="btn btn-outline-secondary" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-search" viewBox="0 0 16 16">
+                <path
+                    d="M11 6a5 5 0 1 1-10 0 5 5 0 0 1 10 0zm-1.293 6.707a6 6 0 1 0-1.414-1.414l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85z" />
+            </svg>
+        </button>
+    </form>
+    <a href="{{ route('materiais.create') }}" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-person-plus" viewBox="0 0 16 16">
+            <path
+                d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm4.5 8a5.5 5.5 0 1 1-9-4.5A5.5 5.5 0 0 1 10.5 16zm-4.5-1a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9z" />
+            <path
+                d="M15 8a.5.5 0 0 1-.5.5H13v1.5a.5.5 0 0 1-1 0V8.5h-1.5a.5.5 0 0 1 0-1H12V6a.5.5 0 0 1 1 0v1.5h1.5A.5.5 0 0 1 15 8z" />
+        </svg>
+        Adicionar Material
+    </a>
+</div>
 <div class="table-responsive">
     <table class="table align-middle">
         <thead class="table-light">

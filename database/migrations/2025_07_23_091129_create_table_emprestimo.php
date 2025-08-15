@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('unidades');
             $table->decimal('multa', 8, 2)->default(0);
             $table->string('notificacao')->default(false);
-            $table->enum('status_emprestimo', ['PENDENTE', 'EMPRESTADO', 'DEVOLVIDO', 'REJEITADO', 'VALIDAR', 'VALIDADO', 'DEVOLVER'])->default('PENDENTE');
+            $table->enum('status_emprestimo', ['PENDENTE', 'EMPRESTADO', 'DEVOLVIDO', 'REJEITADO', 'VALIDAR', 'VALIDADO', 'DEVOLVER', 'LEVANTAR', 'CONFIRMAR_LEVANTAMENTO', 'ENTREGAR', 'AGUARDANDO_CONFIRMACAO_DE_LEVANTAMENTO', 'AGUARDANDO_CONFIRMACAO_DE_ENTREGA', 'AGUARDANDO_CONFIRMACAO_DE_DEVOLUCAO', 'AGUARDANDO_DEVOLUCAO', 'PEDIDO_DE_SOLICITACAO_DE_DEVOLUCAO'])->default('PENDENTE');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('material_id')->references('id')->on('materiais')->onDelete('set null');
             $table->timestamps();
