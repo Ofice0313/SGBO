@@ -57,16 +57,6 @@
                             
                             <h5>{{ $material->titulo }}</h5>
                             <p><strong>Autor:</strong> {{ $material->autor }}</p>
-
-                            
-                            <div class="mt-3">
-                                @if($material->hasPdf())
-                                    <span class="badge bg-success me-2">PDF Disponível</span>
-                                @endif
-                                @if($material->hasAudio())
-                                    <span class="badge bg-info">Áudio Disponível</span>
-                                @endif
-                            </div>
                         </div>
                     </div>
                 </div>

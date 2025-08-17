@@ -1,17 +1,32 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use App\Models\Material;
 use App\Models\Subcategoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class MaterialController extends Controller
+class LivroController extends Controller
 {
-    public function tela_de_livros(){
+     /**
+     * Exibe o conteúdo do livro em um iframe sem permitir download/cópia.
+     */
+    
+    public function visualizarLivro($id)
+    {
+        $material = Material::findOrFail($id);
+        // Verifica se o arquivo existe
+        if (!$material->caminho_do_arquivo || !Storage::disk('public')->exists($material->caminho_do_arquivo)) {
+            abort(404, 'Arquivo não encontrado.');
+        }
+        return view('books.visualizar', compact('material'));
+    }
+
+    public function tela_de_livros()
+    {
         $data = [
             'title' => 'tela de livros',
         ];
@@ -37,10 +52,10 @@ class MaterialController extends Controller
 
 
 
-    public function visualizar(Material $material)
-    {
-        return view('material.visualizar', compact('material'));
-    }
+    // public function visualizar(Material $material)
+    // {
+    //     return view('material.visualizar', compact('material'));
+    // }
 
     // Método para visualizar PDF de forma protegida
     public function viewPdf(Material $material)
@@ -50,7 +65,7 @@ class MaterialController extends Controller
         }
 
         $caminhoDoArquivo = storage_path('app/private/materiais/' . $material->caminho_do_arquivo);
-        
+
         if (!file_exists($caminhoDoArquivo)) {
             abort(404, 'Arquivo não encontrado');
         }
@@ -74,26 +89,26 @@ class MaterialController extends Controller
         }
 
         $caminhoDoArquivo = storage_path('app/private/audiobooks/' . $material->caminho_do_audio);
-        
+
         if (!file_exists($caminhoDoArquivo)) {
             abort(404, 'Arquivo não encontrado');
         }
 
         $fileSize = filesize($caminhoDoArquivo);
         $file = fopen($caminhoDoArquivo, 'rb');
-        
+
         // Suporte para Range requests (streaming)
         $start = 0;
         $end = $fileSize - 1;
-        
+
         if (isset($_SERVER['HTTP_RANGE'])) {
             $range = $_SERVER['HTTP_RANGE'];
             list($param, $range) = explode('=', $range);
-            
+
             if (strtolower(trim($param)) == 'bytes') {
                 $range = explode(',', $range);
                 $range = explode('-', $range[0]);
-                
+
                 if (count($range) == 2) {
                     if (is_numeric($range[0])) {
                         $start = intval($range[0]);
@@ -106,9 +121,9 @@ class MaterialController extends Controller
         }
 
         $length = $end - $start + 1;
-        
+
         fseek($file, $start);
-        
+
         header('HTTP/1.1 206 Partial Content');
         header('Accept-Ranges: bytes');
         header('Content-Length: ' . $length);
@@ -117,7 +132,7 @@ class MaterialController extends Controller
         header('Cache-Control: no-cache, no-store, must-revalidate');
         header('Pragma: no-cache');
         header('Expires: 0');
-        
+
         $buffer = 1024 * 8;
         while (!feof($file) && ($pos = ftell($file)) <= $end) {
             if ($pos + $buffer > $end) {
@@ -126,7 +141,7 @@ class MaterialController extends Controller
             echo fread($file, $buffer);
             flush();
         }
-        
+
         fclose($file);
         exit;
     }
@@ -165,8 +180,9 @@ class MaterialController extends Controller
         // Upload do PDF
         if ($request->hasFile('caminho_do_arquivo')) {
             $pdfFile = $request->file('caminho_do_arquivo');
-            $pdfName = Str::uuid() . '.pdf';
-            $pdfFile->storeAs('private/books', $pdfName);
+            // $pdfName = Str::uuid() . '.pdf';
+            $pdfName = Str::of($request->titulo)->slug('-') . '.' . $request->caminho_do_arquivo->getClientOriginalExtension();
+            $pdfFile->storeAs('public/books', $pdfName);
             $material->caminho_do_arquivo = $pdfName;
         }
 
@@ -181,14 +197,14 @@ class MaterialController extends Controller
         // Upload da capa
         if ($request->hasFile('caminho_da_imagem')) {
             $coverFile = $request->file('caminho_da_imagem');
-            $coverName = Str::uuid() . '.' . $coverFile->getClientOriginalExtension();
-            $coverFile->storeAs('public/covers', $coverName);
-            $material->caminho_da_imagem = $coverName;
+            $nameFile = Str::of($request->titulo)->slug('-') . '.' . $request->caminho_da_imagem->getClientOriginalExtension();
+            $coverFile->storeAs('public/covers', $nameFile);
+            $material->caminho_da_imagem = $nameFile;
         }
 
         $material->save();
 
-        return redirect()->route('materiais.index')->with('success', 'Livro adicionado com sucesso!');
+        return back()->with('success', 'Livro cadastrado com sucesso!');
     }
 
 
@@ -235,7 +251,7 @@ class MaterialController extends Controller
                     unlink($oldPdfPath);
                 }
             }
-            
+
             $pdfFile = $request->file('caminho_do_arquivo');
             $pdfName = Str::uuid() . '.pdf';
             $pdfFile->storeAs('private/books', $pdfName);
@@ -251,7 +267,7 @@ class MaterialController extends Controller
                     unlink($oldAudioPath);
                 }
             }
-            
+
             $audioFile = $request->file('caminho_do_audio');
             $audioName = Str::uuid() . '.' . $audioFile->getClientOriginalExtension();
             $audioFile->storeAs('private/audiobooks', $audioName);
@@ -267,7 +283,7 @@ class MaterialController extends Controller
                     unlink($oldCoverPath);
                 }
             }
-            
+
             $coverFile = $request->file('caminho_da_imagem');
             $coverName = Str::uuid() . '.' . $coverFile->getClientOriginalExtension();
             $coverFile->storeAs('public/covers', $coverName);
@@ -307,5 +323,4 @@ class MaterialController extends Controller
 
         return redirect()->route('materiais.index')->with('success', 'Livro removido com sucesso!');
     }
-    
 }

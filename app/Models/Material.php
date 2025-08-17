@@ -54,9 +54,10 @@ class Material extends Model
         'minutos' => 'integer'
     ];
 
+
     public function hasPdf(): bool
     {
-        return !empty($this->caminho_do_arquivo) && file_exists(storage_path('app/private/books/' . $this->caminho_do_arquivo));
+        return !empty($this->caminho_do_arquivo) && file_exists(storage_path('app/public/books/' . $this->caminho_do_arquivo));
     }
 
     public function hasAudio(): bool
@@ -64,9 +65,10 @@ class Material extends Model
         return !empty($this->caminho_do_audio) && file_exists(storage_path('app/private/audiobooks/' . $this->caminho_do_audio));
     }
 
+
     public function getPdfUrl(): string
     {
-        return route('books.view-pdf', $this->id);
+        return asset('storage/books/' . $this->caminho_do_arquivo);
     }
 
     public function getAudioUrl(): string

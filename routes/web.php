@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\{CheckRole, CheckAuth};
 use App\Enums\Role;
+use App\Http\Controllers\Admin\LivroController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 
@@ -87,13 +89,13 @@ Route::group(['middleware' => 'Admin'], function(){
 
     //Materias 
     Route::prefix('materiais')->name('materiais.')->group(function () {
-        Route::get('/materiais', [MaterialController::class, 'index'])->name('index');
-        Route::get('/create', [MaterialController::class, 'create'])->name('create');
-        Route::get('/tela_de_livros', [MaterialController::class, 'tela_de_livros'])->name('tela_de_livros');
-        Route::post('/store', [MaterialController::class, 'store'])->name('store');
-        Route::get('/{material}/edit', [MaterialController::class, 'edit'])->name('edit');
-        Route::put('/{material}/update', [MaterialController::class, 'update'])->name('update');
-        Route::delete('/{material}/destroy', [MaterialController::class, 'destroy'])->name('destroy');
+        Route::get('/materiais', [LivroController::class, 'index'])->name('index');
+        Route::get('/create', [LivroController::class, 'create'])->name('create');
+        Route::get('/tela_de_livros', [LivroController::class, 'tela_de_livros'])->name('tela_de_livros');
+        Route::post('/store', [LivroController::class, 'store'])->name('store');
+        Route::get('/{material}/edit', [LivroController::class, 'edit'])->name('edit');
+        Route::put('/{material}/update', [LivroController::class, 'update'])->name('update');
+        Route::delete('/{material}/destroy', [LivroController::class, 'destroy'])->name('destroy');
     });
 
     //Cursos
@@ -168,4 +170,10 @@ Route::group(['middleware' => 'User'], function(){
 Route::get('forgot', [AuthController::class, 'forgot']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/tela_de_livros', [MaterialController::class, 'tela_de_livros'])->name('tela_de_livros');
+Route::get('/tela_de_livros', [LivroController::class, 'tela_de_livros'])->name('tela_de_livros');
+
+Route::get('/books', [BookController::class, 'books'])->name('books');
+
+// Visualizar conteúdo do livro sem download/cópia
+Route::get('/books/{id}/visualizar', [LivroController::class, 'visualizarLivro'])->name('books.visualizarLivro');
+
