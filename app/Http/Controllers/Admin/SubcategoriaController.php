@@ -33,31 +33,28 @@ class SubcategoriaController extends Controller
 
     public function edit($id)
     {
-        $categoria = Categoria::with('categoria')->findOrFail($id);
-        $data = [
-            'title' => 'editar_categoria',
-            'usuario' => $categoria,
-        ];
-        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria actualizada com sucesso!');
+    $subcategoria = Subcategoria::with('categoria')->findOrFail($id);
+    // ... lógica de edição se necessário ...
+    return back()->with('success', 'Subcategoria carregada para edição!');
     }
 
     public function update(Request $request, $id)
     {
-        $subcategoria = Categoria::findOrFail($id);
+        $subcategoria = Subcategoria::findOrFail($id);
         $data = $request->validate([
             'nome' => 'required|string',
-            'categoria' => 'nullable|string',
+            'categoria_id' => 'required|exists:categorias,id',
         ]);
         $subcategoria->fill($data);
         $subcategoria->save();
-        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria atualizada com sucesso!');
+        return back()->with('success', 'Subcategoria atualizada com sucesso!');
     }
 
     public function destroy($id)
     {
-        $subcategoria = Categoria::findOrFail($id);
-        $subcategoria->delete();
-        return redirect()->route('subcategorias.index')->with('success', 'Sucategoria excluído com sucesso!');
+    $subcategoria = Subcategoria::findOrFail($id);
+    $subcategoria->delete();
+    return redirect()->route('subcategorias.index')->with('success', 'Sucategoria excluído com sucesso!');
     }
 
     public function store(Request $request)
@@ -70,11 +67,11 @@ class SubcategoriaController extends Controller
             'categoria_id.exists' => 'A categoria selecionada não existe.',
         ]);
 
-        $subcategorias = new Categoria();
-        $subcategorias->nome = $request->nome;
-        $subcategorias->categoria_id = $request->categoria_id;
-        $subcategorias->save();
+        $subcategoria = new Subcategoria();
+        $subcategoria->nome = $request->nome;
+        $subcategoria->categoria_id = $request->categoria_id;
+        $subcategoria->save();
 
-        return redirect()->route('subcategorias.index')->with('success', 'Subcategoria criada com sucesso!.');
+        return back()->with('success', 'Subcategoria criada com sucesso!');
     }
 }

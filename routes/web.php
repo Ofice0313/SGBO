@@ -11,6 +11,9 @@ use App\Http\Controllers\Main;
 use App\Http\Middleware\CheckLogin;
 use App\Http\Middleware\CheckLogout;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\RelatorioController;
+
+
 
 use App\Http\Middleware\{CheckRole, CheckAuth};
 use App\Enums\Role;
@@ -151,6 +154,13 @@ Route::group(['middleware' => 'Admin'], function(){
         Route::put('/{id}/aceitarPedidoDeDevolucao', [EmprestimoController::class, 'aceitarPedidoDeDevolucao'])->name('aceitarPedidoDeDevolucao');
         Route::put('/{id}/confirmarDevolucao', [EmprestimoController::class, 'confirmarDevolucao'])->name('confirmarDevolucao');
     });
+
+    Route::prefix('relatorio')->name('relatorio.')->group(function() {
+        Route::get('/relatorio', [RelatorioController::class, 'index'])->name('index');
+        Route::get('/relatorio/emprestimos/pdf', [RelatorioController::class, 'emprestimosPdf'])->name('emprestimos.pdf');
+    });
+
+    
 });
 
 Route::group(['middleware' => 'User'], function(){
@@ -173,7 +183,14 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/tela_de_livros', [LivroController::class, 'tela_de_livros'])->name('tela_de_livros');
 
 Route::get('/books', [BookController::class, 'books'])->name('books');
+Route::get('/{id}/visualizar', [LivroController::class, 'visualizarLivro'])->name('visualizarLivro');
+Route::get('/view-pdf/{id}', [LivroController::class, 'view'])->name('view.pdf');
+   
 
 // Visualizar conteúdo do livro sem download/cópia
-Route::get('/books/{id}/visualizar', [LivroController::class, 'visualizarLivro'])->name('books.visualizarLivro');
+Route::get('/books/{id}/visualizar', [LivroController::class, 'visualizarLivro'])->name('books.visualizar');
 
+Route::get('/view-pdf/{id}', [LivroController::class, 'view'])->name('view.pdf');
+// // Relatório do admin
+// Route::get('relatorio', [RelatorioController::class, 'index'])->name('relatorio.index');
+// Route::get('relatorio/emprestimos/pdf', [RelatorioController::class, 'emprestimosPdf'])->name('relatorio.emprestimos.pdf');

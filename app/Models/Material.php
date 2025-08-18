@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models;    
 
 use App\Enums\StatusMaterial;
 use App\Enums\TipoDeMaterial;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Material extends Model
 {
@@ -74,5 +75,10 @@ class Material extends Model
     public function getAudioUrl(): string
     {
         return route('books.stream-audio', $this->id);
+    }
+
+    public function emprestimos()
+    {
+        return $this->hasMany(Emprestimo::class, 'material_id');
     }
 }

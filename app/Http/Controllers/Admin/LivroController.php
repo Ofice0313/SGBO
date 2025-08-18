@@ -8,6 +8,8 @@ use App\Models\Subcategoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 
 class LivroController extends Controller
 {
@@ -23,6 +25,36 @@ class LivroController extends Controller
             abort(404, 'Arquivo não encontrado.');
         }
         return view('books.visualizar', compact('material'));
+    }
+
+    public function view($id)
+    {
+        // Encontra o livro/arquivo no banco de dados
+        $material = Material::findOrFail($id);
+        
+        // Verifica se o arquivo existe
+        $filePath = storage_path('app/public/books' . $material->caminho_do_arquivo);
+        
+        if (!File::exists($filePath)) {
+            abort(404);
+        }
+
+        // Carregue o conteúdo do PDF
+        $fileContent = File::get($filePath);
+        
+        // Cria uma resposta com o tipo MIME correto
+        $response = new Response($fileContent, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . basename($filePath) . '"'
+        ]);
+        
+        // Adiciona headers para evitar cache e download
+        $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
+        $response->headers->set('Pragma', 'no-cache');
+        $response->headers->set('Expires', '0');
+        $response->headers->set('X-Content-Type-Options', 'nosniff');
+        
+        return $response;
     }
 
     public function tela_de_livros()
@@ -79,71 +111,6 @@ class LivroController extends Controller
             'Pragma' => 'no-cache',
             'Expires' => '0'
         ]);
-    }
-
-    // Método para stream de áudio protegido
-    public function streamAudio(Material $material)
-    {
-        if (!$material->hasAudio()) {
-            abort(404, 'Audiolivro não encontrado');
-        }
-
-        $caminhoDoArquivo = storage_path('app/private/audiobooks/' . $material->caminho_do_audio);
-
-        if (!file_exists($caminhoDoArquivo)) {
-            abort(404, 'Arquivo não encontrado');
-        }
-
-        $fileSize = filesize($caminhoDoArquivo);
-        $file = fopen($caminhoDoArquivo, 'rb');
-
-        // Suporte para Range requests (streaming)
-        $start = 0;
-        $end = $fileSize - 1;
-
-        if (isset($_SERVER['HTTP_RANGE'])) {
-            $range = $_SERVER['HTTP_RANGE'];
-            list($param, $range) = explode('=', $range);
-
-            if (strtolower(trim($param)) == 'bytes') {
-                $range = explode(',', $range);
-                $range = explode('-', $range[0]);
-
-                if (count($range) == 2) {
-                    if (is_numeric($range[0])) {
-                        $start = intval($range[0]);
-                    }
-                    if (is_numeric($range[1])) {
-                        $end = intval($range[1]);
-                    }
-                }
-            }
-        }
-
-        $length = $end - $start + 1;
-
-        fseek($file, $start);
-
-        header('HTTP/1.1 206 Partial Content');
-        header('Accept-Ranges: bytes');
-        header('Content-Length: ' . $length);
-        header('Content-Range: bytes ' . $start . '-' . $end . '/' . $fileSize);
-        header('Content-Type: audio/mpeg');
-        header('Cache-Control: no-cache, no-store, must-revalidate');
-        header('Pragma: no-cache');
-        header('Expires: 0');
-
-        $buffer = 1024 * 8;
-        while (!feof($file) && ($pos = ftell($file)) <= $end) {
-            if ($pos + $buffer > $end) {
-                $buffer = $end - $pos + 1;
-            }
-            echo fread($file, $buffer);
-            flush();
-        }
-
-        fclose($file);
-        exit;
     }
 
     // Método para upload de livros (admin)

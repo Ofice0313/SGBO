@@ -12,19 +12,19 @@
         <div class="col-md-4">
             <div class="p-4 bg-light rounded">
                 <p class="fw-medium mb-1">Total de livros</p>
-                <h4>12,450</h4>
+                <h4>{{ $totalLivros }}</h4>
             </div>
         </div>
         <div class="col-md-4">
             <div class="p-4 bg-light rounded">
                 <p class="fw-medium mb-1">Usuários registrados</p>
-                <h4>3,200</h4>
+                <h4>{{ $totalUsuarios }}</h4>
             </div>
         </div>
         <div class="col-md-4">
             <div class="p-4 bg-light rounded">
                 <p class="fw-medium mb-1">Empréstimos ativos</p>
-                <h4>850</h4>
+                <h4>{{ $emprestimosAtivos }}</h4>
             </div>
         </div>
     </div>
@@ -39,6 +39,13 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($livrosPopulares as $livro)
+                    <tr>
+                        <td>{{ $livro->titulo }}</td>
+                        <td>{{ $livro->autor }}</td>
+                        <td>{{ $livro->emprestimos_count ?? 0 }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -53,6 +60,13 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($notificacoesPendentes as $notificacao)
+                    <tr>
+                        <td>{{ $notificacao->user->nome ?? '-' }}</td>
+                        <td>{{ $notificacao->material->titulo ?? '-' }}</td>
+                        <td>{{ $notificacao->data_de_devolucao }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

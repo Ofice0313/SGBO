@@ -11,6 +11,7 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
+            font-size: 12px;
         }
 
         .img-cover {
@@ -19,14 +20,32 @@
             height: 100%;
             border-radius: .5rem;
         }
+
+        .tabela {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .texto .tdd{
+            border: 1px solid #333;
+            padding: 6px;
+            text-align: left;
+        }
+
+        .thh {
+            background: #eee;
+        }
     </style>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
 </head>
 
 <body class="bg-white text-dark">
 
     @yield('content')
-   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>
