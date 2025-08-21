@@ -156,8 +156,9 @@ class LivroController extends Controller
         // Upload do áudio
         if ($request->hasFile('caminho_do_audio')) {
             $audioFile = $request->file('caminho_do_audio');
-            $audioName = Str::uuid() . '.' . $audioFile->getClientOriginalExtension();
-            $audioFile->storeAs('private/audiobooks', $audioName);
+            //$audioName = Str::uuid() . '.' . $audioFile->getClientOriginalExtension();
+            $audioName = Str::of($request->titulo)->slug('-') . '.' . $request->caminho_do_audio->getClientOriginalExtension();
+            $audioFile->storeAs('public/audiobooks', $audioName);
             $material->caminho_do_audio = $audioName;
         }
 

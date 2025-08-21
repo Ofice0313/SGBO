@@ -23,6 +23,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\ConfiguracoesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LogsController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -151,6 +152,7 @@ Route::get('/books', [BookController::class, 'books'])->name('books');
 Route::get('/{id}/visualizar', [LivroController::class, 'visualizarLivro'])->name('visualizarLivro');
 Route::get('/view-pdf/{id}', [LivroController::class, 'view'])->name('view.pdf');
    
+Route::get('/ler-pdf', [PdfController::class, 'lerPdf'])->name('ler_pdf');
 
 // Visualizar conteúdo do livro sem download/cópia
 Route::get('/books/{id}/visualizar', [LivroController::class, 'visualizarLivro'])->name('books.visualizar');

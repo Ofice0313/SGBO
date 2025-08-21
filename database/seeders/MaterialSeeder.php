@@ -59,7 +59,7 @@ class MaterialSeeder extends Seeder
                 'caminho_da_imagem' => 'laravel.png',
                 'caminho_do_audio' => 'laravel.mp3',
                 'caminho_do_arquivo' => 'laravel.pdf',
-                'status_material' => 'INDISPONIVEL',
+                'status_material' => 'DISPONIVEL',
                 'is_active' => true,
                 'subcategoria_id' => 2,
                 'minutos' => 60,

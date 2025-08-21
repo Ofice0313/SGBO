@@ -39,6 +39,7 @@
                                                 alt="Capa do Livro" class="img-fluid mb-3" style="max-height: 200px;">
                                             <h5>{{ $material->titulo }}</h5>
                                             <p><strong>Autor:</strong> {{ $material->autor }}</p>
+                                            <p><strong>Tipo de Material:</strong>{{$material->tipo}}</p>
                                             <p><strong>Status:</strong> {{ $material->status_material }}</p>
                                             <p><strong>Editora:</strong> {{ $material->editora }}</p>
                                             <p><strong>Ano de Publicação:</strong> {{ $material->ano_de_publicacao }}</p>
@@ -51,11 +52,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="{{ asset('storage/books/' . $material->caminho_do_arquivo) }}" class="btn btn-warning btn-sm"
-                                target="_blank">
+                            @if($material->tipo === 'LIVRO')
+                                <a href="{{ asset('storage/books/' . $material->caminho_do_arquivo) }}" class="btn btn-warning btn-sm"
+                                    target="_blank">
+                                    <i class="bi bi-book-fill"></i> Visualizar conteúdo
+                                </a>
+                            @elseif($material->tipo === 'AUDIOLIVRO')
+                                <!-- Botão para abrir o modal de áudio -->
+                                <button type="button" class="btn btn-warning btn-sm"
+                                    data-bs-toggle="modal" data-bs-target="#audioModal{{ $material->id }}">
+                                    <i class="bi bi-headset"></i> Ouvir Audiolivro
+                                </button>
 
-                                <i class="bi bi-book-fill"></i> Visualizar conteúdo
-                            </a>
+                                <!-- Modal do player de áudio -->
+                                <div class="modal fade" id="audioModal{{ $material->id }}" tabindex="-1"
+                                    aria-labelledby="audioModalLabel{{ $material->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="audioModalLabel{{ $material->id }}">
+                                                    Ouvir Audiolivro: {{ $material->titulo }}
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Fechar"></button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <audio controls style="width: 100%;">
+                                                    <source src="{{ asset('storage/audiobooks/' . $material->caminho_do_audio) }}" type="audio/mpeg">
+                                                    Seu navegador não suporta o elemento de áudio.
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
