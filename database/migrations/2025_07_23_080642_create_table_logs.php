@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
+            $table->integer('tentativas')->default(0);
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');

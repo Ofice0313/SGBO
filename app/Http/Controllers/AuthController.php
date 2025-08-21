@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\Role;
 use App\Models\Curso;
+use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -35,8 +36,16 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'instituicao' => $request->instituicao, 'password' => $request->password], true)) {
             if (Auth::User()->role == "USER") {
+                Log::create([
+                    'user_id' => Auth::id(),
+                    'tentativas' => 1,
+                ]);
                 return redirect()->intended('user/dashboard');
             } else if (Auth::User()->role == "ADMIN") {
+                Log::create([
+                    'user_id' => Auth::id(),
+                    'tentativas' => 1,
+                ]);
                 return redirect()->intended('admin/dashboard');
             } else {
                 return back()->withErrors(['password' => 'A senha é incorrecta, tente novamente.']);

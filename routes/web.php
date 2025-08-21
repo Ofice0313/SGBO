@@ -20,7 +20,9 @@ use App\Enums\Role;
 use App\Http\Controllers\Admin\LivroController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ConfiguracoesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LogsController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -59,7 +61,7 @@ Route::group(['middleware' => 'Admin'], function(){
         Route::post('/store', [CursoController::class, 'store'])->name('store');
         Route::get('/{curso}/edit', [CursoController::class, 'edit'])->name('edit');
         Route::put('/{curso}', [CursoController::class, 'update'])->name('update');
-        Route::get('/cursos', [CursoController::class, 'cursos'])->name('cursos');
+        //Route::get('/cursos', [CursoController::class, 'cursos'])->name('cursos');
         Route::delete('/{curso}', [CursoController::class, 'destroy'])->name('destroy');
     });
 
@@ -110,6 +112,16 @@ Route::group(['middleware' => 'Admin'], function(){
         Route::get('/relatorio/emprestimos/pdf', [RelatorioController::class, 'emprestimosPdf'])->name('emprestimos.pdf');
     });
 
+    Route::prefix('configuracoes')->name('configuracoes.')->group(function (){
+        Route::get('/configuracoes', [ConfiguracoesController::class, 'index'])->name('index');
+        Route::post('/promover/{user}', [ConfiguracoesController::class, 'promover'])->name('promover');
+        Route::post('/despromover/{user}', [ConfiguracoesController::class, 'despromover'])->name('despromover');
+    });
+
+    Route::prefix('logs')->name('logs.')->group(function (){
+        Route::get('/logs', [LogsController::class, 'index'])->name('index');
+    });
+
     
 });
 
@@ -131,7 +143,6 @@ Route::group(['middleware' => 'User'], function(){
 // Route::get('/forgot-password', function () {
 //     return view('auth.forgot_password');
 // })->name('forgot_password');
-
 
 
 Route::get('/tela_de_livros', [LivroController::class, 'tela_de_livros'])->name('tela_de_livros');

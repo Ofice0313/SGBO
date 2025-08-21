@@ -73,4 +73,9 @@ class User extends Authenticatable
         return $this->hasMany(Emprestimo::class);
     }
 
+    public function logs()
+    {
+        return $this->hasMany(Log::class, 'user_id');
+    }
+
 }

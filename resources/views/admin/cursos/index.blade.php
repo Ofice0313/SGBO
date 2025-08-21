@@ -2,7 +2,7 @@
 @section('content')
     <h1 class="h3 fw-bold mb-4">Cursos</h1>
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <form class="d-flex" style="max-width: 400px;" method="GET" action="{{ route('cursos.cursos') }}">
+        <form class="d-flex" style="max-width: 400px;" method="GET" action="{{ route('cursos.index') }}">
             <input class="form-control me-2" type="search" name="q" value="{{ request('q') }}"
                 placeholder="Pesquisar curso..." aria-label="Pesquisar">
             <button class="btn btn-outline-secondary" type="submit">
