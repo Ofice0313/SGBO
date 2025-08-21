@@ -66,14 +66,14 @@ class UsuarioController extends Controller
         }
         $usuario->fill($data);
         $usuario->save();
-        return redirect()->route('usuarios.index')->with('success', 'Usuário atualizado com sucesso!');
+        return back()->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy($id)
     {
         $usuario = User::findOrFail($id);
         $usuario->delete();
-        return redirect()->route('usuarios.index')->with('success', 'Usuário excluído com sucesso!');
+        return back()->with('success', 'Usuário excluído com sucesso!');
     }
 
     public function create()
@@ -114,6 +114,6 @@ class UsuarioController extends Controller
         $user->status = true; // exemplo: define ativo
         $user->save();
 
-        return redirect()->route('usuarios.index')->with('success', 'Conta criada com sucesso! Faça login.');
+        return back()->with('success', 'Conta criada com sucesso! Faça login.');
     }
 }

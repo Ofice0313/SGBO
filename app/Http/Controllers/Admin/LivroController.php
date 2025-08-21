@@ -259,7 +259,7 @@ class LivroController extends Controller
 
         $material->save();
 
-        return redirect()->route('materiais.index', $material)->with('success', 'Livro atualizado com sucesso!');
+        return back()->with('success', 'Livro atualizado com sucesso!');
     }
 
     public function destroy(Material $material)
@@ -288,6 +288,6 @@ class LivroController extends Controller
 
         $material->delete();
 
-        return redirect()->route('materiais.index')->with('success', 'Livro removido com sucesso!');
+        return back()->with('success, Livro removido com sucesso!');
     }
 }

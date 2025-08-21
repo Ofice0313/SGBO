@@ -46,7 +46,7 @@ class CursoController extends Controller
             'nome' => $request->nome
         ]);
 
-        return redirect()->route('cursos.index')->with('success', 'Curso criado com sucesso!');
+        return back()->with('success', 'Curso criado com sucesso!');
     }
 
     public function edit(Curso $curso)
@@ -68,12 +68,12 @@ class CursoController extends Controller
             'nome' => $request->nome
         ]);
 
-        return redirect()->route('cursos.index')->with('success', 'Curso atualizado com sucesso!');
+        return back()->with('success', 'Curso atualizado com sucesso!');
     }
 
     public function destroy(Curso $curso)
     {
         $curso->delete();
-        return redirect()->route('cursos.index')->with('success', 'Curso excluído com sucesso!');
+        return back()->with('success', 'Curso eliminado com sucesso!');
     }
 }

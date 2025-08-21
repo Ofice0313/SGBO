@@ -33,32 +33,30 @@ class AuthController extends Controller
             'password.min' => 'A senha deve ter no mínimo 5 caracteres.',
         ]);
 
-        if(Auth::attempt(['email' => $request->email, 'instituicao' => $request->instituicao, 'password' => $request->password], true))
-        {
-            if(Auth::User()->role == "USER")
-            {
+        if (Auth::attempt(['email' => $request->email, 'instituicao' => $request->instituicao, 'password' => $request->password], true)) {
+            if (Auth::User()->role == "USER") {
                 return redirect()->intended('user/dashboard');
-            }else if(Auth::User()->role == "ADMIN")
-            {
+            } else if (Auth::User()->role == "ADMIN") {
                 return redirect()->intended('admin/dashboard');
-            }else{
-                return redirect()->route('login')->with('error', 'Credencias invalidas.');
+            } else {
+                return back()->withErrors(['password' => 'A senha é incorrecta, tente novamente.']);
             }
-        }else{
+        } else {
             return redirect()->back()->with('error', 'Digite os dados certos.');
         }
     }
 
     public function create()
     {
-        $cursos = Curso::all(); 
+        $cursos = Curso::all();
         $data = [
             'title' => 'registrar-me'
         ];
         return view('auth.cadastrar_usuario', compact('data', 'cursos'));
     }
 
-    public function cadastrar_usuario(Request $request){
+    public function cadastrar_usuario(Request $request)
+    {
 
         $request->validate([
             'nome' => 'required|string|max:255',
@@ -90,7 +88,8 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Conta criada com sucesso! Faça login.');
     }
 
-     public function forgot(){
+    public function forgot()
+    {
         $data['meta_title'] = 'Esqueceu a Palavra Passe';
         return view('auth.forgot_password', $data);
     }
@@ -105,5 +104,29 @@ class AuthController extends Controller
 
         return redirect('/login');
     }
-      
+
+    public function resetPasswordForm()
+    {
+        $data['meta_title'] = 'Redefinir Senha';
+        return view('auth.forgot_password', $data);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            $user->password = bcrypt($request->password);
+            $user->save();
+            return redirect()->route('login')->with('success', 'Senha redefinida com sucesso! Faça login.');
+        } else {
+            return back()->with('error', 'Usuário não encontrado.');
+        }
+    }
 }

@@ -85,17 +85,22 @@
                                         placeholder="Total de páginas">
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6" id="div-minutos">
                                     <label for="minutos" class="form-label">Duração (em minutos)</label>
                                     <input type="number" name="minutos" id="minutos" class="form-control" min="1" placeholder="Ex: 120">
                                 </div>
                             </div>
 
                             <div class="col-12 d-flex flex-column flex-md-row align-items-start gap-3">
-                                <div class="col-md-6">
+                                <div class="col-md-6" id="div-arquivo-material">
                                     <label for="arquivo" class="form-label">Arquivo do material</label>
                                     <input class="form-control" type="file" name="caminho_do_arquivo" id="arquivo"
-                                        accept=".pdf,.doc,.docx,.epub,.mp3,.wav">
+                                        accept=".pdf,.doc,.docx,.epub">
+                                </div>
+
+                                <div class="col-md-6" id="div-arquivo-audio" style="display:none;">
+                                    <label for="audio" class="form-label">Arquivo de Áudio</label>
+                                    <input class="form-control" type="file" name="caminho_do_audio" id="audio" accept="audio/*">
                                 </div>
 
                                 <div class="col-md-6">
@@ -107,13 +112,75 @@
 
                         </div>
 
-                        <div class="mt-4 text-end">
+                        <div class="mt-4 text-end d-flex gap-2 justify-content-end">
+                            <button type="button" class="btn btn-secondary px-4" id="btn-cancelar">Cancelar</button>
                             <button type="submit" class="btn btn-dark px-4">Registrar</button>
                         </div>
                     </form>
-                </div>
 
+                </div>
             </div>
         </main>
     </div>
+
+<!-- Modal de feedback -->
+<div class="modal fade" id="modalFeedback" tabindex="-1" aria-labelledby="modalFeedbackLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalFeedbackLabel">Mensagem</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body" id="modalFeedbackBody">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tipo = document.getElementById('tipo');
+        const divMinutos = document.getElementById('div-minutos');
+        const divArquivoMaterial = document.getElementById('div-arquivo-material');
+        const divArquivoAudio = document.getElementById('div-arquivo-audio');
+        const btnCancelar = document.getElementById('btn-cancelar');
+        const form = document.querySelector('form');
+
+        function toggleCampos() {
+            if (tipo.value === 'LIVRO') {
+                divMinutos.style.display = 'none';
+                divArquivoMaterial.style.display = '';
+                divArquivoAudio.style.display = 'none';
+            } else if (tipo.value === 'AUDIOLIVRO') {
+                divMinutos.style.display = '';
+                divArquivoMaterial.style.display = 'none';
+                divArquivoAudio.style.display = '';
+            } else {
+                divMinutos.style.display = '';
+                divArquivoMaterial.style.display = '';
+                divArquivoAudio.style.display = 'none';
+            }
+        }
+        tipo.addEventListener('change', toggleCampos);
+        toggleCampos();
+
+        btnCancelar.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('modalFeedbackBody').innerText = 'Registro cancelado pelo usuário.';
+            var modal = new bootstrap.Modal(document.getElementById('modalFeedback'));
+            modal.show();
+        });
+
+        form.addEventListener('submit', function(e) {
+            setTimeout(function() {
+                document.getElementById('modalFeedbackBody').innerText = 'Material registrado com sucesso!';
+                var modal = new bootstrap.Modal(document.getElementById('modalFeedback'));
+                modal.show();
+            }, 100);
+        });
+    });
+</script>
 @endsection

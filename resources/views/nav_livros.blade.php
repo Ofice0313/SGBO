@@ -8,26 +8,17 @@
         <h2 class="h5 fw-bold mb-0 text-dark">Bibliotecca Online</h2>
         </div>
         <nav class="d-flex gap-4">
-        <a href="#" class="text-dark text-decoration-none">Início</a>
-            <a href="#" class="text-dark text-decoration-none">Livros</a>
+        <a href="" class="text-decoration-none fw-medium text-dark">Início</a>
+        <a href="{{ route('books') }}" class="text-decoration-none fw-medium text-dark">Livro</a>
+        <form action="{{ route('books') }}" method="GET" class="d-flex align-items-center ms-3">
+            <input type="text" name="q" class="form-control form-control-sm me-2" placeholder="Pesquisar por título, autor, categoria ou subcategoria">
+            <button type="submit" class="btn btn-outline-primary btn-sm">Buscar</button>
+        </form>
         </nav>
     </div>
 
         <div class="d-flex align-items-center gap-3">
-          <div class="input-group w-auto">
-            <span class="input-group-text bg-light border-0 rounded-start">
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
-                ></path>
-              </svg>
-            </span>
-            <input
-              type="text"
-              class="form-control search-input rounded-end"
-              placeholder="pesquise"
-            />
-          </div>
+          
 
           <button class="btn btn-light rounded-circle p-2">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 256 256">

@@ -33,7 +33,7 @@ class CategoriaController extends Controller
             'nome' => $request->nome
         ]);
 
-        return redirect()->route('categorias.index')->with('success', 'Categoria criado com sucesso!');
+        return back()->with('success', 'Categoria cadastrada com sucesso!');
     }
 
     public function edit(Categoria $categoria)
@@ -42,7 +42,7 @@ class CategoriaController extends Controller
             'title' => 'Editar Curso',
             'categoria' => $categoria,
         ];
-        return redirect()->route('categorias.index')->with('success', 'Categoria actualizada com sucesso!');
+        return back()->with('success', 'Categoria editada com sucesso!');
     }
 
     public function update(Request $request, Categoria $categoria)
@@ -55,12 +55,12 @@ class CategoriaController extends Controller
             'nome' => $request->nome
         ]);
 
-        return redirect()->route('categorias.index')->with('success', 'Categoria atualizado com sucesso!');
+        return back()->with('success', 'Categoria atualizada com sucesso!');
     }
 
     public function destroy(Categoria $categoria)
     {
         $categoria->delete();
-        return redirect()->route('categorias.index')->with('success', 'Curso excluído com sucesso!');
+        return back()->with('success', 'Categoria eliminada com sucesso!');
     }
 }

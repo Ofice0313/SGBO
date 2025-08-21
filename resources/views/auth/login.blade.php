@@ -16,6 +16,23 @@
                     <h1 class="h4 fw-bold text-dark mt-2">Biblioteca Online</h1>
                 </div>
 
+                {{-- Mensagens de erro e sucesso --}}
+                @if($errors->has('password'))
+                    <div class="alert alert-danger">
+                        {{ $errors->first('password') }}
+                    </div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <form method="POST" action="{{ route('login_submit') }}">
                     @csrf
                     <div class="mb-3">
@@ -32,7 +49,6 @@
                                 <option value="ISLORE">IsLore</option>
                                 <option value="FOCO">FOCO</option>
                             </select>
-                            <span class="material-icons text-secondary">expand_more</span>
                         </div>
                     </div>
                     <div class="mb-4">
@@ -49,7 +65,7 @@
                 </p>
             
                 <p class="text-center mt-4 small">Esqueceu o password?
-                    <a class="text-primary text-decoration-none" href="{{ url('forgot')}}">
+                    <a class="text-primary text-decoration-none" href="{{ url('resetPasswordForm')}}">
                         Recuperar senha</a>
                 </p>
             </div>

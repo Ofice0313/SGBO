@@ -27,64 +27,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', [AuthController::class, 'login']);
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('login_submit', [AuthController::class, 'login_submit'])->name('login_submit');
 Route::get('/create', [AuthController::class, 'create']);
 Route::post('/cadastrar_usuario', [AuthController::class, 'cadastrar_usuario'])->name('cadastrar_usuario');
-
-//Gestao de cursos
-Route::prefix('cursos')->name('cursos.')->group(function () {
-    Route::get('/', [CursoController::class, 'index'])->name('index');
-    Route::get('/create', [CursoController::class, 'create'])->name('create');
-    Route::post('/store', [CursoController::class, 'store'])->name('store');
-    Route::get('/{curso}/edit', [CursoController::class, 'edit'])->name('edit');
-    Route::put('/{curso}/update', [CursoController::class, 'update'])->name('update');
-    Route::get('/{curso}/cursos', [CursoController::class, 'cursos'])->name('cursos');
-    Route::delete('/{curso}/destroy', [CursoController::class, 'destroy'])->name('destroy');
-});
-
-//Gestao de Usuarios
-Route::prefix('cursos')->name('cursos.')->group(function () {
-    Route::get('/', [CursoController::class, 'index'])->name('index');
-    Route::get('/create', [CursoController::class, 'create'])->name('create');
-    Route::post('/store', [CursoController::class, 'store'])->name('store');
-    Route::get('/{curso}/edit', [CursoController::class, 'edit'])->name('edit');
-    Route::put('/{curso}/update', [CursoController::class, 'update'])->name('update');
-    Route::get('/{curso}/cursos', [CursoController::class, 'cursos'])->name('cursos');
-    Route::delete('/{curso}/destroy', [CursoController::class, 'destroy'])->name('destroy');
-});
-
-// Gestão de Categorias
-Route::prefix('categorias')->name('categorias.')->group(function () {
-    Route::get('/', [CategoriaController::class, 'index'])->name('index');
-    Route::get('/create', [CategoriaController::class, 'create'])->name('create');
-    Route::post('/store', [CategoriaController::class, 'store'])->name('store');
-    Route::get('/{categoria}/edit', [CategoriaController::class, 'edit'])->name('edit');
-    Route::put('/{categoria}/update', [CategoriaController::class, 'update'])->name('update');
-    Route::delete('/{categoria}/destroy', [CategoriaController::class, 'destroy'])->name('destroy');
-});
-
-//Gestão de subcategorias
-Route::prefix('subcategorias')->name('subcategorias.')->group(function () {
-    Route::get('/', [SubcategoriaController::class, 'index'])->name('index');
-    Route::get('/create', [SubcategoriaController::class, 'create'])->name('create');
-    Route::post('/store', [SubcategoriaController::class, 'store'])->name('store');
-    Route::get('/{subcategoria}/edit', [SubcategoriaController::class, 'edit'])->name('edit');
-    Route::put('/{subcategoria}/update', [SubcategoriaController::class, 'update'])->name('update');
-    Route::delete('/{subcategoria}/destroy', [SubcategoriaController::class, 'destroy'])->name('destroy');
-});
-
-//Gestão de Empréstimos
-
-// Route::get('/', [EmprestimoController::class, 'index'])->name('index');
-// Route::get('/create', [EmprestimoController::class, 'create'])->name('create');
-// Route::post('/store', [EmprestimoController::class, 'store'])->name('store');
-// Route::get('/{emprestimo}/edit', [EmprestimoController::class, 'edit'])->name('edit');
-// Route::put('/{emprestimo}/update', [EmprestimoController::class, 'update'])->name('update');
-// Route::delete('/{emprestimo}/destroy', [EmprestimoController::class, 'destroy'])->name('destroy');
-// Route::patch('/emprestimos/{id}/aprovar', [EmprestimoController::class, 'aprovar'])->name('emprestimos.aprovar');
-// Route::patch('/emprestimos/{id}/rejeitar', [EmprestimoController::class, 'rejeitar'])->name('emprestimos.rejeitar');
-// Route::get('/materiais/{id}/disponibilidade', [EmprestimoController::class, 'verificarDisponibilidade'])->name('materiais.verificarDisponibilidade');
+Route::get('/resetPasswordForm', [AuthController::class, 'resetPasswordForm'])->name('reset
+passwordForm');
+Route::post('/resetPassword', [AuthController::class, 'resetPassword'])->name('resetPassword');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::group(['middleware' => 'Admin'], function(){
@@ -177,8 +127,12 @@ Route::group(['middleware' => 'User'], function(){
     
 });
 
-Route::get('forgot', [AuthController::class, 'forgot']);
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+// // Forgot password
+// Route::get('/forgot-password', function () {
+//     return view('auth.forgot_password');
+// })->name('forgot_password');
+
+
 
 Route::get('/tela_de_livros', [LivroController::class, 'tela_de_livros'])->name('tela_de_livros');
 

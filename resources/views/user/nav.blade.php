@@ -5,7 +5,7 @@
     </div>
     <nav class="d-flex gap-4">
         <a href="" class="text-decoration-none fw-medium text-dark">Início</a>
-        <a href="" class="text-decoration-none fw-medium text-dark">Fazer empréstimo</a>
+        <a href="{{ route('books') }} " class="text-decoration-none fw-medium text-dark">Livros</a>
     </nav>
     <div class="d-flex align-items-center gap-3">
         <button class="btn btn-light rounded-pill"></button>

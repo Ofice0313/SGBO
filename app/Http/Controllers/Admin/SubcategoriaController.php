@@ -54,7 +54,7 @@ class SubcategoriaController extends Controller
     {
     $subcategoria = Subcategoria::findOrFail($id);
     $subcategoria->delete();
-    return redirect()->route('subcategorias.index')->with('success', 'Sucategoria excluído com sucesso!');
+    return back()->with('success', 'Sucategoria excluído com sucesso!');
     }
 
     public function store(Request $request)

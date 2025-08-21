@@ -5,11 +5,7 @@
     </div>
     <nav class="d-flex gap-4 align-items-center">
         <a href="" class="text-decoration-none fw-medium text-dark">Início</a>
-        <a href="{{ route('books') }}" class="text-decoration-none fw-medium text-dark">Livro</a>
-        <form action="{{ route('books') }}" method="GET" class="d-flex align-items-center ms-3">
-            <input type="text" name="q" class="form-control form-control-sm me-2" placeholder="Pesquisar por título, autor, categoria ou subcategoria">
-            <button type="submit" class="btn btn-outline-primary btn-sm">Buscar</button>
-        </form>
+        <a href="{{ route('books') }}" class="text-decoration-none fw-medium text-dark">Livros</a>
     </nav>
     <div class="d-flex align-items-center gap-3">
         <button class="btn btn-light rounded-pill"></button>
